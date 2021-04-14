@@ -107,3 +107,8 @@ active,a:hover{
   background-color: #808000;
   margin-top: 10px;
 }
+
+.form-group {
+  margin-top: 10px;
+margin-left: 50px;
+}
