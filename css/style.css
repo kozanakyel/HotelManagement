@@ -97,3 +97,13 @@ active,a:hover{
     left: 0;
   }
 }
+
+#sliderrooms{
+  width: 60%;
+  margin:0px 20%;
+}
+
+.footer{
+  background-color: #808000;
+  margin-top: 10px;
+}
