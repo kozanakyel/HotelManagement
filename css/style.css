@@ -1,14 +1,59 @@
-
-*{
+* {
   padding: 0;
   margin: 0;
   text-decoration: none;
   list-style: none;
   box-sizing: border-box;
 }
-body{
+
+body {
   font-family: Arial, Helvetica, sans-serif;
 }
+nav{
+  background: #808000;
+  margin-bottom: 20px;
+}
+nav ul li a{
+  color: white;
+  font-size: 17px;
+  padding: 7px 13px;
+  border-radius: 3px;
+  text-transform: uppercase;
+}
+
+/**
+manage part
+*/
+
+:root{
+  --primary : #808000;
+  --light: #ffffff;
+  --grey: #efefef;
+}
+.manage-page{
+  overflow: hidden;
+  font-weight: 300;
+  color:white;
+}
+
+a:hover{
+  text-decoration: none;
+}
+
+#sidebar-container{
+  min-height: 100vh;
+  background-color: #808000;
+}
+
+#sidebar-container .logo{
+  padding: .875rem 1.25rem;
+}
+
+#sidebar-container .menu{
+  width: 15rem;
+}
+
+/**
 nav{
   background: #808000;
   height: 80px;
@@ -98,25 +143,57 @@ active,a:hover{
   }
 }
 
-#sliderrooms{
+*/
+#sliderrooms {
   width: 60%;
-  margin:0px 20%;
+  margin-top: 20px;
+  margin: 0px 20%;
 }
 
-.footer{
+.footer {
   background-color: #808000;
   margin-top: 10px;
+  color: white;
 }
 
 .form-group {
   margin-top: 10px;
-margin-left: 50px;
+  margin-left: 50px;
 }
 
-.display-4{
+.display-4 {
   margin: 40px;
 }
 
-.container{
+.container {
   margin-bottom: 20px;
+}
+
+.form-container {
+  width: 400px;
+  margin-top: 25px;
+  background: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px 0px #000;
+  position: relative;
+}
+
+.btn-gradient {
+  background: #808000;
+}
+
+.dots {
+  font-size: 2.4em;
+  margin-left: .5rem;
+  opacity: .75;
+}
+
+.room-img {
+  widows: 200px;
+  height: 200px;
+}
+
+.row-item {
+  margin: 40px;
 }
