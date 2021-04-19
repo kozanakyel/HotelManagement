@@ -9,7 +9,6 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="../css/style.css">
 
-
 </head>
 
 <body class="manage-page">
@@ -20,15 +19,13 @@
       </div>
       <div class="menu">
         <a href="#" class="d-block text-light p-3"><i class="fas fa-person-booth mr-2"></i>Rooms</a>
-        <a href="checkin.html" class="d-block text-light p-3"><i class="fas fa-calendar-week mr-2"></i>Guests Check in</a>
+        <a href="#checkin" class="d-block text-light p-3"><i class="fas fa-calendar-week mr-2"></i>Guests Check in</a>
         <a href="#" class="d-block text-light p-3"><i class="fas fa-calendar-week mr-2"></i>Guests Check out</a>
         <a href="housekeeping.html" class="d-block text-light p-3"><i class="fas fa-pump-soap mr-2"></i>House Keeping</a>
         <a href="reservation.html" class="d-block text-light p-3"><i class="fas fa-book-open mr-2"></i>Reservation</a>
         <a href="#" class="d-block text-light p-3"><i class="fas fa-flag mr-2"></i>Reports</a>
       </div>
     </div>
-
-
 
     <div class="container w-100">
 
@@ -70,72 +67,42 @@
       </div>
       <!-- for the table rooms menu-->
       <div class="row text-dark">
-        <div class="col">
-          <div class="form-group">
+        <div class="col ml-5">
+
+          <hr>
+          <h4 class="display-6 mr-10" style="font-weight:bold; color:black;">Reservation</h1>
+            <label for="room-number">Room Number</label>
+            <input type="number" class="ml-5" id="room-number">
+            <button type="submit" class="btn btn-primary ml-5">Submit</button>
             <hr>
-            <h4 class="display-6 mr-10" style="font-weight:bold; color:black;">Check In</h1>
-              <hr>
-            <form>
-              <div class="form-row">
-                <div class="form-group col-md-2">
-                  <label for="guest-name">Guest Name</label>
-                  <input class="form-control" type="text"id="guest-number">
-                </div>
-                <div class="form-group col-md-2">
-                  <label for="checkin">Check-In</label>
-                  <input type="date" class="form-control" id="checkin">
-                </div>
-                <div class="form-group col-md-2">
-                  <label for="checkout">Check-Out</label>
-                  <input type="date" class="form-control" id="checkout">
-                </div>
-                </div>
-                <div class="form-row">
-                  <div class="form-group col-md-2">
-                    <label for="room-number">Room number</label>
-                    <input class="form-control" type="number" value="100" id="room-number">
-                  </div>
-                  <div class="form-group col-md-2">
-                    <label for="adults-number">Adults</label>
-                    <input class="form-control" type="number" value="0" id="adults-number">
-                  </div>
-                  <div class="form-group col-md-2">
-                    <label for="child-number">Childs</label>
-                    <input class="form-control" type="number" value="0" id="childs-number">
-                  </div>
-                </div>
-                <div class="form-row">
-                  <div class="form-group col-md-2">
-                    <label for="gender">Gender</label>
-                    <input class="form-control" type="text"id="gender">
-                  </div>
-                  <div class="form-group col-md-2">
-                    <label for="payment">Payment Info</label>
-                    <input class="form-control" type="text"id="payment">
-                  </div>
-                  <div class="form-group col-md-2">
-                    <label for="total-price">total Price</label>
-                    <input class="form-control" type="number" value="0" id="total-price">
-                  </div>
-                </div>
-
-              <div class="form-group col-md-2">
-                <button type="submit" class="btn btn-primary">Confirm Reservaton</button>
+            <div class="conntainer">
+              <div class="row border border-success">
+                <div class="col border border-success">Name: Alex</div>
+                <div class="col border border-success">Checkin date:22,04,2014</div>
               </div>
-            </form>
-          </div>
-
+              <div class="row border border-success">
+                <div class="col border border-success">Surname: Jaime</div>
+                <div class="col border border-success">Check out date: 25,23,2012</div>
+              </div>
+              <div class="row border border-success">
+                <div class="col border border-success">Gender: Male</div>
+                <div class="col border border-success">Payment: Cash</div>
+              </div>
+              <div class="row border border-success">
+                <div class="col border border-success">Adults: 2</div>
+                <div class="col border border-success">Child: 1</div>
+              </div>
+              <div class="row border border-success">
+                <div class="col border border-success">Total Price</div>
+                <div class="col border border-success">
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+              </div>
+            </div>
         </div>
       </div>
-
-
-
-
-
     </div>
-
-
-  </div>
+    </div>
 
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
