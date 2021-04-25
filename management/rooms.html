@@ -9,7 +9,6 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="../css/style.css">
 
-
 </head>
 
 <body class="manage-page">
@@ -67,66 +66,50 @@
         </div>
       </div>
       <!-- for the table rooms menu-->
-      <div class="row text-dark">
-        <div class="col">
-          <div class="form-group">
+      <div class="row w-100 text-dark">
+
+
+          <div class="container">
             <hr>
-            <h4 class="display-6 mr-10" style="font-weight:bold; color:black;">Check In</h1>
-              <hr>
-              <form>
-                <div class="form-row">
-                  <div class="form-group col-md-2">
-                    <label for="guest-name">Guest Name</label>
-                    <input class="form-control" type="text" id="guest-number">
-                  </div>
-                  <div class="form-group col-md-2">
-                    <label for="checkin">Check-In</label>
-                    <input type="date" class="form-control" id="checkin">
-                  </div>
-                  <div class="form-group col-md-2">
-                    <label for="checkout">Check-Out</label>
-                    <input type="date" class="form-control" id="checkout">
-                  </div>
-                </div>
-                <div class="form-row">
-                  <div class="form-group col-md-2">
-                    <label for="room-number">Room number</label>
-                    <input class="form-control" type="number" value="100" id="room-number">
-                  </div>
-                  <div class="form-group col-md-2">
-                    <label for="adults-number">Adults</label>
-                    <input class="form-control" type="number" value="0" id="adults-number">
-                  </div>
-                  <div class="form-group col-md-2">
-                    <label for="child-number">Childs</label>
-                    <input class="form-control" type="number" value="0" id="childs-number">
-                  </div>
-                </div>
-                <div class="form-row">
-                  <div class="form-group col-md-2">
-                    <label for="gender">Gender</label>
-                    <input class="form-control" type="text" id="gender">
-                  </div>
-                  <div class="form-group col-md-2">
-                    <label for="payment">Payment Info</label>
-                    <input class="form-control" type="text" id="payment">
-                  </div>
-                  <div class="form-group col-md-2">
-                    <label for="total-price">total Price</label>
-                    <input class="form-control" type="number" value="0" id="total-price">
-                  </div>
-                </div>
-
-                <div class="form-group col-md-2">
-                  <button type="submit" class="btn btn-primary">Confirm Reservaton</button>
-                </div>
-              </form>
+            <h4 class="display-6 mr-10" style="font-weight:bold; color:black;">Rooms</h1>
+            <hr>
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">Number</th>
+                  <th scope="col">Type</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Price/Daily</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">101</th>
+                  <td>Deluxe</td>
+                  <td style="background:red; color:white;">
+                    Full
+                  </td>
+                  <td>200$</td>
+                </tr>
+                <tr>
+                  <th scope="row">202</th>
+                  <td>Standart</td>
+                  <td style="background:green;"> <a style="color:white;" href="reservation.html">Reserved</a></td>
+                  <td>150$</td>
+                </tr>
+                <tr>
+                  <th scope="row">303</th>
+                  <td>Nightly</td>
+                  <td style="background:blue; color:white;">Empty</td>
+                  <td>120$</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
-        </div>
+
       </div>
+
     </div>
-
-
   </div>
 
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
