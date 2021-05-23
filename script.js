@@ -1,9 +1,9 @@
 function goUserPage(){
   var x = confirm("Kayıt bilgileriniz doğru mu?");
   if (x == true){
-      location = "userPage.html";
+      location = "userPage.php";
   } else {
-      location = "signin.html";
+      location = "signin.php";
   }
 }
 

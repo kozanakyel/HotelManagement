@@ -8,6 +8,9 @@
   <script src="https://kit.fontawesome.com/f85b28bbc8.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="../css/style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+  </script>
+
 
 </head>
 
@@ -17,8 +20,17 @@
       <div class="logo">
         <h4 class="text-light font-weight-bold">Kozan Hotel</h4>
       </div>
+      <div class="menu">
+        <a href="rooms.php" class="d-block text-light p-3"><i class="fas fa-person-booth mr-2"></i>Rooms</a>
+        <a href="checkin.php" class="d-block text-light p-3"><i class="fas fa-calendar-week mr-2"></i>Guests Check in</a>
 
+        <a href="housekeeping.php" class="d-block text-light p-3"><i class="fas fa-pump-soap mr-2"></i>House Keeping</a>
+        <a href="reservation.php" class="d-block text-light p-3"><i class="fas fa-book-open mr-2"></i>Reservation</a>
+        <a href="reports.php" class="d-block text-light p-3"><i class="fas fa-flag mr-2"></i>Reports</a>
+      </div>
     </div>
+
+
 
     <div class="container w-100">
 
@@ -58,39 +70,3 @@
           </nav>
         </div>
       </div>
-      <!-- for the table rooms menu-->
-      <section class="container-fluid text-dark">
-        <section class="row justify-content-center mr-5">
-          <section class="col-12 col-sm-6 col-md-3">
-            <h1 class="display-6">Login Management</h6>
-            <form class="form-container">
-              <div class="form-group">
-                <label for="">Staff ID:</label>
-                <input type="number" class="form-control">
-              </div>
-              <div class="form-group">
-                <label for="exampleInputPassword1">Password</label>
-                <input type="password" class="form-control" id="exampleInputPassword1">
-              </div>
-              <div class="form-group form-check">
-                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                <label class="form-check-label" for="exampleCheck1">Check me out</label>
-              </div>
-              <!--<button type="submit" class="btn btn-primary btn-block">Submit</button>-->
-              <a href="checkin.html" class="btn btn-secondary btn-block active" role="button" aria-pressed="true">Submit</a>
-            </form>
-          </section>
-        </section>
-
-      </section>
-
-    </div>
-    </div>
-
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-
-</body>
-
-</html>
