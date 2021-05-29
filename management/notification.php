@@ -1,4 +1,6 @@
-<?php require '../header/manheader.php';?>
+<?php
+
+require '../header/manheader.php';?>
 
 <?php
   include '../setting/connection.php';

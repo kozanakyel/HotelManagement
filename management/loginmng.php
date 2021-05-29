@@ -1,10 +1,40 @@
-<?php require '../header/manheader.php';?>
+<html lang="en">
+
+<head>
+  <title>Mazarin Hotel</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://kit.fontawesome.com/f85b28bbc8.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+  </script>
+
+
+</head>
+
+<body class="manage-page">
+  <div class="d-flex">
+    <div id="sidebar-container">
+      <div class="logo">
+        <h4 class="text-light font-weight-bold">Kozan Hotel</h4>
+      </div>
+      <div class="menu">
+
+      </div>
+    </div>
+
+
+
+    <div class="container w-100">
+
 
       <!-- for the table rooms menu-->
       <section class="container-fluid text-dark">
         <section class="row justify-content-center mr-5">
           <section class="col-12 col-sm-6 col-md-3">
-            <h1 class="display-6">Login Management</h6>
+            <h1 class="display-8" style="margin-top:80px;">Login Management</h6>
 
 
             <form class="form-container" action="../setting/process.php" method="POST">

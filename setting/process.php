@@ -1,4 +1,6 @@
 <?php
+ob_start();
+session_start();
   include 'connection.php';
   //$hes = 2012;
   //echo md5($hes);
@@ -23,6 +25,16 @@
     ));
 
     echo $result = $staffask->rowCount();
+    if ($result == 1) {
+
+      $_SESSION['staffid'] = $s_id;
+      header("Location:../management/notification.php");
+      exit;
+
+    }else {
+      header("Location:../management/loginmng.php?status=no");
+      exit;
+    }
 
 
   }else {
