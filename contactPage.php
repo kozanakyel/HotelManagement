@@ -65,7 +65,6 @@
 
  <?php
     if(isset($_POST['get_contactmsg'])){
-      echo $_POST['cname'], $_POST['csurname'], $_POST['cemail'], $_POST['cphone'], $_POST['cmsg'];
 
       $contactask = $conn->prepare("INSERT INTO contactmsg SET
           cname = ?,

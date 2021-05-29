@@ -5,22 +5,26 @@
         <section class="row justify-content-center mr-5">
           <section class="col-12 col-sm-6 col-md-3">
             <h1 class="display-6">Login Management</h6>
-            <form class="form-container">
+
+
+            <form class="form-container" action="../setting/process.php" method="POST">
               <div class="form-group">
                 <label for="">Staff ID:</label>
-                <input type="number" class="form-control">
+                <input type="number" required name="sid" class="form-control">
               </div>
               <div class="form-group">
-                <label for="exampleInputPassword1">Password</label>
-                <input type="password" class="form-control" id="exampleInputPassword1">
+                <label for="">Password</label>
+                <input type="password" required class="form-control" name="spassword" id="">
               </div>
               <div class="form-group form-check">
-                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                <input type="checkbox" class="form-check-input" id="">
                 <label class="form-check-label" for="exampleCheck1">Check me out</label>
               </div>
               <!--<button type="submit" class="btn btn-primary btn-block">Submit</button>-->
-              <a href="checkin.html" class="btn btn-secondary btn-block active" role="button" aria-pressed="true">Submit</a>
+              <button name="log_staff" type="submit" class="btn btn-primary btn-block active">Submit</button>
             </form>
+
+
           </section>
         </section>
 
