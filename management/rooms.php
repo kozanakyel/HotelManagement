@@ -65,7 +65,7 @@
             <h4 class="display-6 mr-10" style="font-weight:bold; color:black;">Update Room</h1>
 
 
-  <form action="" method="post">
+  <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
 
       <select name="rooms[]">
         <option value="" >Choose room</option>

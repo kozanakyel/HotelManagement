@@ -1,4 +1,6 @@
-<?php require 'header/header.php';?>
+<?php require 'header/header.php';
+  include 'setting/connection.php';
+?>
 
 
   <!-- Content and forms -->
@@ -25,26 +27,26 @@
 
   <!--Forms for content-->
   <div class="container">
-    <form>
+    <form action="<?php echo $_SERVER["PHP_SELF"];?>" method="POST">
       <div class="form-row">
         <div class="form-group col-md-4">
           <label for="nameContact">Name</label>
-          <input type="text" class="form-control" id="nameContact" placeholder="Name">
+          <input type="text" name="cname" required class="form-control" id="nameContact" placeholder="Name">
         </div>
         <div class="form-group col-md-4">
           <label for="lastNameContact">Last Name</label>
-          <input type="text" class="form-control" id="lastNameContact" placeholder="LastName">
+          <input type="text" name="csurname" required class="form-control" id="lastNameContact" placeholder="LastName">
         </div>
       </div>
 
       <div class="form-row">
         <div class="form-group col-md-4">
           <label for="emailContact">Email</label>
-          <input type="email" class="form-control" id="emailContact" placeholder="Email">
+          <input type="email" name="cemail" required class="form-control" id="emailContact" placeholder="Email">
         </div>
         <div class="form-group col-md-4">
           <label for="phoneContact">Phone</label>
-          <input type="tel" class="form-control" id="phoneContact" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" placeholder="Phone Number">
+          <input type="tel" name="cphone" required  class="form-control" id="phoneContact" placeholder="Phone Number">
         </div>
 
       </div>
@@ -52,14 +54,34 @@
       <div class="form-row">
         <div class="form-group col-md-8">
           <label for="messagecontact">Message</label>
-          <textarea class="form-control" rows="5" id="messagecontact"></textarea>
+          <textarea class="form-control" name="cmsg" required rows="5" id="messagecontact"></textarea>
         </div>
       </div>
 
       <div class="form-group col-md-4">
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" name="get_contactmsg" class="btn btn-primary">Submit</button>
       </div>
     </form>
+
+ <?php
+    if(isset($_POST['get_contactmsg'])){
+      echo $_POST['cname'], $_POST['csurname'], $_POST['cemail'], $_POST['cphone'], $_POST['cmsg'];
+
+      $contactask = $conn->prepare("INSERT INTO contactmsg SET
+          cname = ?,
+            csurname = ?,
+              cemail = ?,
+                cphone=?,
+                cmsg =?
+
+      ");
+      $insert = $contactask->execute(array(
+        $_POST['cname'], $_POST['csurname'], $_POST['cemail'], $_POST['cphone'], $_POST['cmsg']
+      ));
+    }
+
+  ?>
+
   </div>
 
   <div class="container">

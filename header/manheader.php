@@ -24,7 +24,7 @@
       </div>
       <div class="menu">
         <a href="rooms.php" class="d-block text-light p-3"><i class="fas fa-person-booth mr-2"></i>Rooms</a>
-        <a href="checkin.php" class="d-block text-light p-3"><i class="fas fa-calendar-week mr-2"></i>Guests Check in</a>
+        <a href="notification.php" class="d-block text-light p-3"><i class="fas fa-calendar-week mr-2"></i>Notification</a>
 
         <a href="housekeeping.php" class="d-block text-light p-3"><i class="fas fa-pump-soap mr-2"></i>House Keeping</a>
         <a href="reservation.php" class="d-block text-light p-3"><i class="fas fa-book-open mr-2"></i>Reservation</a>
