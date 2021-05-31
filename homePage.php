@@ -1,3 +1,7 @@
+<?php
+ob_start();
+session_start();
+?>
 <?php require 'header/header.php';?>
 
   <!-- slider for hotel -->

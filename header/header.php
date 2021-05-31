@@ -1,6 +1,7 @@
 <?php
 ob_start();
 session_start();
+include 'setting/connection.php';
 ?>
 
 <!DOCTYPE html>
@@ -32,12 +33,21 @@ session_start();
       <li class="nav-item">
         <a class="nav-link" href="contactPage.php">Contact</a>
       </li>
+      <?php if (isset($_SESSION['clientemail'])){?>
+      <li class="nav-item">
+        <a class="nav-link" href="userPage.php"><?php echo $_SESSION['clientname'] . "   " . $_SESSION['clientsurname']; ?></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="logout.php">Log Out</a>
+      </li>
+      <?php } else{ ?>
       <li class="nav-item">
         <a class="nav-link" href="login.php">Login</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="signin.php">Signin</a>
       </li>
+      <?php } ?>
     </ul>
   </div>
 </nav>

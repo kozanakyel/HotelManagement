@@ -1,42 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php
+ob_start();
+session_start();
+require 'header/header.php';
+echo $_SESSION['clientname'];
 
-<head>
-  <title>Mazarin Hotel</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="css/style.css">
-  <script src="https://kit.fontawesome.com/f85b28bbc8.js" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+$clientask = $conn->prepare("SELECT * FROM client WHERE clientemail=?");
+$clientask->execute(array(
+  $_SESSION['clientemail']
+));
+echo $countclient= $clientask->rowCount();
+$client_fetch = $clientask->fetch(PDO::FETCH_ASSOC);
 
+if ($countclient == 0) {
+  Header("Location:login.php?status=unauthlog");
+}
 
-</head>
-
-<body>
-
-  <!-- navbar for hotel -->
-  <nav class="navbar navbar-expand-lg">
-    <a class="navbar-brand" href="homePage.php" style="color:white; font-size:36px; font-weight:bold;">KOZAN HOTEL</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"><i class="fas fa-bars" style="color:white;"></i></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
-        <li class="nav-item active">
-          <a class="nav-link" href="homePage.php">Home <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="contactPage.php">Contact</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="login.php">Logout</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="signin.php">Thomas Hardy</a>
-        </li>
-      </ul>
-    </div>
-  </nav>
+?>
 
   <!--  Manage Reservations -->
 
@@ -74,21 +53,15 @@
                           <label for="checkout">Check-Out</label>
                           <input type="date" class="form-control" id="checkout">
                         </div>
-                        <div class="form-group">
-                          <label for="adults-number">Adults</label>
-                          <input class="form-control" type="number" value="0" id="adults-number">
-                        </div>
-                        <div class="form-group">
-                          <label for="child-number">Childs</label>
-                          <input class="form-control" type="number" value="0" id="childs-number">
-                        </div>
+
                         <div class="form-group">
                           <label for="housekeeping">Room type</label>
                           <div>
                             <select class="form-control" id="housekeeping">
                               <option value="1">Deluxe</option>
                               <option value="2">Standart</option>
-                              <option value="3">Nightly</option>
+                              <option value="3">Family</option>
+                              <option value="4">Family-lux</option>
                             </select>
                           </div>
                         </div>
@@ -145,62 +118,6 @@
                 </td>
               </tr>
 
-              <tr>
-                <td>
-                  <span class="custom-checkbox">
-                    <input type="checkbox" id="checkbox1" name="options[]" value="1">
-                    <label for="checkbox1"></label>
-                  </span>
-                </td>
-                <td>Thomas Hardy</td>
-                <td>akman@mail.com</td>
-                <td>21-02-2022</td>
-                <td>21-02-2022</td>
-                <td>5</td>
-                <td>Standart</td>
-                <td>
-                  <a href="#editReservationModal" class="edit" data-toggle="modal"><i class="fas fa-edit"></i></i></a>
-                  <a href="#deleteReservationModal" class="delete" data-toggle="modal"><i class="fas fa-trash"></i></i></a>
-                </td>
-              </tr>
-
-              <tr>
-                <td>
-                  <span class="custom-checkbox">
-                    <input type="checkbox" id="checkbox1" name="options[]" value="1">
-                    <label for="checkbox1"></label>
-                  </span>
-                </td>
-                <td>drogba Hardy</td>
-                <td>thomashardy@mail.com</td>
-                <td>21-02-2022</td>
-                <td>21-02-2022</td>
-                <td>3</td>
-                <td>Nightly</td>
-                <td>
-                  <a href="#editReservationModal" class="edit" data-toggle="modal"><i class="fas fa-edit"></i></i></a>
-                  <a href="#deleteReservationModal" class="delete" data-toggle="modal"><i class="fas fa-trash"></i></i></a>
-                </td>
-              </tr>
-
-              <tr>
-                <td>
-                  <span class="custom-checkbox">
-                    <input type="checkbox" id="checkbox1" name="options[]" value="1">
-                    <label for="checkbox1"></label>
-                  </span>
-                </td>
-                <td>Thomas Hardy</td>
-                <td>jordan@mail.com</td>
-                <td>21-02-2022</td>
-                <td>21-02-2022</td>
-                <td>3</td>
-                <td>Nightly</td>
-                <td>
-                  <a href="#editReservationModal" class="edit" data-toggle="modal"><i class="fas fa-edit"></i></i></a>
-                  <a href="#deleteReservationModal" class="delete" data-toggle="modal"><i class="fas fa-trash"></i></i></a>
-                </td>
-              </tr>
 
             </tbody>
           </table>
@@ -242,20 +159,9 @@
                       </div>
                       <div class="col d-flex flex-column flex-sm-row justify-content-between mb-3">
                         <div class="text-center text-sm-left mb-2 mb-sm-0">
-                          <h4 class="pt-sm-2 pb-1 mb-0 text-nowrap">John Smith</h4>
-                          <p class="mb-0">@johnny.s</p>
-                          <div class="text-muted"><small>Last seen 2 hours ago</small></div>
-                          <div class="mt-2">
-                            <button class="btn btn-primary" type="button">
-                              <i class="fa fa-fw fa-camera"></i>
-                              <span>Change Photo</span>
-                            </button>
-                          </div>
+                          <h4 class="pt-sm-2 pb-1 mb-0 text-nowrap"><?php echo $client_fetch['clientname'] . " " . $client_fetch['clientsurname'] ?></h4>
                         </div>
-                        <div class="text-center text-sm-right">
-                          <span class="badge badge-secondary">administrator</span>
-                          <div class="text-muted"><small>Joined 09 Dec 2017</small></div>
-                        </div>
+
                       </div>
                     </div>
                     <ul class="nav nav-tabs">
@@ -269,14 +175,14 @@
                               <div class="row">
                                 <div class="col">
                                   <div class="form-group">
-                                    <label>Full Name</label>
-                                    <input class="form-control" type="text" name="name" placeholder="John Smith" value="John Smith">
+                                    <label>Name</label>
+                                    <input class="form-control" type="text" name="client_name" placeholder="John Smith" value="<?php echo $client_fetch['clientname'] ?>">
                                   </div>
                                 </div>
                                 <div class="col">
                                   <div class="form-group">
-                                    <label>Username</label>
-                                    <input class="form-control" type="text" name="username" placeholder="johnny.s" value="johnny.s">
+                                    <label>Surname</label>
+                                    <input class="form-control" type="text" name="client_surname" placeholder="johnny.s" value="<?php echo $client_fetch['clientsurname'] ?>">
                                   </div>
                                 </div>
                               </div>
@@ -284,7 +190,7 @@
                                 <div class="col">
                                   <div class="form-group">
                                     <label>Email</label>
-                                    <input class="form-control" type="text" placeholder="user@example.com">
+                                    <input name="client_email" class="form-control" type="email" value="<?php echo $client_fetch['clientemail'] ?>">
                                   </div>
                                 </div>
                               </div>
@@ -322,7 +228,7 @@
                           </div>
                           <div class="row">
                             <div class="col d-flex justify-content-end">
-                              <button class="btn btn-primary" type="submit">Save Changes</button>
+                              <button name="save_client_update" class="btn btn-primary" type="submit">Save Changes</button>
                             </div>
                           </div>
                         </form>
@@ -340,7 +246,7 @@
                   <div class="px-xl-3">
                     <button class="btn btn-block btn-secondary">
                       <i class="fa fa-sign-out"></i>
-                      <span>Logout</span>
+                      <span> <a style="color:white;" href="logout.php">Logout</a></span>
                     </button>
                   </div>
                 </div>

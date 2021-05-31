@@ -70,7 +70,7 @@
         }?>
       </select>
 
-      <input type="submit" name="selectstaff" value="Choose options">
+      <button type="submit" class="btn btn-primary" name="selectstaff">Choose Room</button>
   </form>
 
   <?php

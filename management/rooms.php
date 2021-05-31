@@ -67,7 +67,7 @@
 
   <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
 
-      <select name="rooms[]">
+      <select name="rooms[]" class="form-select">
         <option value="" >Choose room</option>
         <?php foreach($roomget as $select){
           echo "<option value='" . $select['roomno'] . "'>". $select['roomno'] . "</option>";
@@ -75,7 +75,7 @@
         }?>
       </select>
 
-      <input type="submit" name="selectroom" value="Choose options">
+      <button type="submit" class="btn btn-primary" name="selectroom">Choose Room</button>
   </form>
 
   <?php

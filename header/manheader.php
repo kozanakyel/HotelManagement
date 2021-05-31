@@ -55,12 +55,12 @@ if (!isset($_SESSION['staffid'])) {
         <a href="reports.php" class="d-block text-light p-3"><i class="fas fa-flag mr-2"></i>Reports</a>
 
         <?php
-          if ($_SESSION['staffid'] == 2012) {
+          if ($s_fetch['position']  == "manager") {
             echo "<a href='staffinfo.php' class='d-block text-light p-3'><i class='fas fa-pump-soap mr-2'></i>Staff Info</a>";
           }
         ?>
         <!--<a href="staffinfo.php" class="d-block text-light p-3"><i class="fas fa-pump-soap mr-2"></i>Staff Info</a>-->
-        <a href="mlogout.php" class="d-block text-light p-3"><i class="fas fa-sign-out-alt"></i>Log Out</a>
+        <a href="mlogout.php" class="d-block text-light p-3"><i class="fas fa-user-lock" style="margin-right:5px;"></i>Log Out</a>
       </div>
     </div>
 

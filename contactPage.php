@@ -1,5 +1,9 @@
+<?php
+ob_start();
+session_start();
+?>
+
 <?php require 'header/header.php';
-  include 'setting/connection.php';
 ?>
 
 
