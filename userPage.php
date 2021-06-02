@@ -15,6 +15,15 @@ if ($countclient == 0) {
   Header("Location:login.php?status=unauthlog");
 }
 
+$reser_ask = $conn->prepare("SELECT *,
+    DATEDIFF(checkoutdate, checkindate) as daycount
+    FROM reservation
+    WHERE clientid=?");
+$reser_ask->execute(array(
+  $client_fetch["clientid"]
+));
+$r_fetch=$reser_ask->fetchAll();
+
 ?>
 
   <!--  Manage Reservations -->
@@ -30,109 +39,46 @@ if ($countclient == 0) {
             <div class="col-sm-6">
 
             <!--New Reservation modal for user hidden modalbox-->
-              <button id="makeReservation" type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">
+              <a role="button" class="btn btn-success" href="central.php">
                 Add New Reservation
-              </button>
-
-              <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel">New Reservation</h5>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-                    <div class="modal-body">
-                      <form>
-                        <div class="form-group">
-                          <label for="checkin">Check-In</label>
-                          <input type="date" class="form-control" id="checkin">
-                        </div>
-                        <div class="form-group">
-                          <label for="checkout">Check-Out</label>
-                          <input type="date" class="form-control" id="checkout">
-                        </div>
-
-                        <div class="form-group">
-                          <label for="housekeeping">Room type</label>
-                          <div>
-                            <select class="form-control" id="housekeeping">
-                              <option value="1">Deluxe</option>
-                              <option value="2">Standart</option>
-                              <option value="3">Family</option>
-                              <option value="4">Family-lux</option>
-                            </select>
-                          </div>
-                        </div>
-
-                      </form>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                      <button type="button" class="btn btn-primary">Save Reservation</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              </a>
 
             </div>
           </div>
-          <table class="table table-striped table-hover">
-            <thead>
-              <tr>
-                <th>
-                  <span class="custom-checkbox">
-                    <input type="checkbox" id="selectAll">
-                    <label for="selectAll"></label>
-                  </span>
-                </th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Checkin</th>
-                <th>Checkout</th>
-                <th>Guests</th>
-                <th>Room type</th>
-                <th></th>
 
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>
-                  <span class="custom-checkbox">
-                    <input type="checkbox" id="checkbox1" name="options[]" value="1">
-                    <label for="checkbox1"></label>
-                  </span>
-                </td>
-                <td>Thomas Hardy</td>
-                <td>thomashardy@mail.com</td>
-                <td>21-02-2022</td>
-                <td>21-02-2022</td>
-                <td>3</td>
-                <td>Deluxe</td>
-                <td>
+          <table class="table">
+          <thead class="thead-dark">
+          <tr>
 
-                  <a href="#editReservationModal" class="edit" data-toggle="modal"><i class="fas fa-edit"></i></i></a>
-                  <a href="#deleteReservationModal" class="delete" data-toggle="modal"><i class="fas fa-trash"></i></i></a>
-                </td>
-              </tr>
+          <th scope="col">Reservation ID</th>
+          <th scope="col">Room No</th>
+          <th scope="col">Check In</th>
+          <th scope="col">Check Out</th>
+          <th scope="col">Day Number</th>
+          <th scope="col">Total Price</th>
+
+          </tr>
+          </thead>
+          <tbody>
+
+          <?php
+          foreach ($r_fetch as $rsr) {
+          echo "<form action='setting/process.php' method='POST'>
+          <tr><th scope='row'><input hidden type='text' name='rsrid_c' value='". $rsr["reservationid"] ."'>". $rsr["reservationid"] ."</th>
+          <td>". $rsr["roomno"] ."</td>
+          <td>". $rsr["checkindate"] ."</td>
+          <td>". $rsr["checkoutdate"] ."</td>
+          <td>". $rsr["daycount"] ."</td>
+          <td>". $rsr["totalprice"] ."</td>
+          <td><input type='submit' class='btn btn-danger' name='listoff_c' value='Go To'></td></tr></form>";
+          }
+
+          ?>
 
 
-            </tbody>
+          </tbody>
           </table>
-          <div class="clearfix">
-            <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
-            <ul class="pagination">
-              <li class="page-item disabled"><a href="#">Previous</a></li>
-              <li class="page-item"><a href="#" class="page-link">1</a></li>
-              <li class="page-item"><a href="#" class="page-link">2</a></li>
-              <li class="page-item active"><a href="#" class="page-link">3</a></li>
-              <li class="page-item"><a href="#" class="page-link">4</a></li>
-              <li class="page-item"><a href="#" class="page-link">5</a></li>
-              <li class="page-item"><a href="#" class="page-link">Next</a></li>
-            </ul>
-          </div>
+
         </div>
       </div>
     </div>

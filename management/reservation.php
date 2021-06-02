@@ -1,41 +1,57 @@
-<?php require '../header/manheader.php';?>
+<?php require '../header/manheader.php';
+
+  $reser_ask = $conn->prepare("SELECT r.*, c.clientname, c.clientsurname, c.clientemail,
+      DATEDIFF(r.checkoutdate,r.checkindate) as daycount
+      FROM reservation r
+      LEFT JOIN client c
+      ON c.clientid = r.clientid WHERE r.checkindate > DATE(NOW())");
+
+  $reser_ask->execute();
+  $r_fetch=$reser_ask->fetchAll();
+
+?>
 
       <!-- for the table rooms menu-->
       <div class="row text-dark">
         <div class="col ml-5">
 
           <hr>
-          <h4 class="display-6 mr-10" style="font-weight:bold; color:black;">Reservation</h1>
-            <label for="room-number">Room Number</label>
-            <input type="number" class="ml-5" value="202" id="room-number">
-            <button type="submit" class="btn btn-primary ml-5">Show</button>
-            <hr>
-            <div class="container" style="background: lightgray;">
-              <div class="row border border-success">
-                <div class="col border border-success">Name: Alex</div>
-                <div class="col border border-success">Checkin date:22,04,2014</div>
-              </div>
-              <div class="row border border-success">
-                <div class="col border border-success">Surname: Jaime</div>
-                <div class="col border border-success">Check out date: 25,23,2012</div>
-              </div>
-              <div class="row border border-success">
-                <div class="col border border-success">Gender: Male</div>
-                <div class="col border border-success">Payment: Cash</div>
-              </div>
-              <div class="row border border-success">
-                <div class="col border border-success">Adults: 2</div>
-                <div class="col border border-success">Child: 1</div>
-              </div>
-              <div class="row border border-success">
-                <div class="col border border-success">Total Price</div>
-                <div class="col border border-success">
-                  <label style="color: red; font-weight:bold;">265$</label>
-                </div>
-              </div>
-            </div>
-        </div>
-      </div>
+          <h4 class="display-6 mr-10" style="font-weight:bold; color:black;">Reservation for future</h1>
+          <hr>
+          <table class="table">
+  <thead class="thead-dark">
+    <tr>
+
+      <th scope="col">Reservation ID</th>
+      <th scope="col">Room No</th>
+      <th scope="col">Check In</th>
+      <th scope="col">Check Out</th>
+      <th scope="col">Customer Name</th>
+      <th scope="col">Day Number</th>
+      <th scope="col">Total Price</th>
+
+    </tr>
+  </thead>
+  <tbody>
+
+      <?php
+      foreach ($r_fetch as $rsr) {
+        echo "<form action='../setting/process.php' method='POST'>
+        <tr><th scope='row'><input hidden type='text' name='rsrid' value='". $rsr["reservationid"] ."'>". $rsr["reservationid"] ."</th>
+        <td>". $rsr["roomno"] ."</td>
+        <td>". $rsr["checkindate"] ."</td>
+        <td>". $rsr["checkoutdate"] ."</td>
+        <td>". $rsr["clientname"] . " " . $rsr["clientsurname"] ."</td>
+        <td>". $rsr["daycount"] ."</td>
+        <td>". $rsr["totalprice"] ."</td>
+        <td><input type='submit' class='btn btn-danger' name='listoff' value='Go To'></td></tr></form>";
+      }
+
+      ?>
+
+
+  </tbody>
+</table>
 
     </div>
     </div>

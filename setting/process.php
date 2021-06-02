@@ -131,7 +131,9 @@ session_start();
   }
 ?>
 
+
 <?php
+//new RESERVATION
  if (isset($_POST['selectroomno'])) {
 
 
@@ -155,4 +157,16 @@ session_start();
      header("Location:../newreservation.php?status=failedreservation");
    }
  }
+?>
+
+
+<?php
+
+  if (isset($_POST["listoff"])) {
+    echo $_POST["rsrid"];
+  }
+
+  if (isset($_POST["listoff_c"])) {
+    echo $_POST["rsrid_c"];
+  }
 ?>

@@ -33,7 +33,7 @@ session_start();
   </div>
 
   <!-- form check in -->
-  <div class="form-group">
+  <div class="form-group" style="margin-left:200px;">
 
     <form method="POST" action="newreservation.php">
       <div class="form-row">
