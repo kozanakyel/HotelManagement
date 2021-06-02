@@ -34,39 +34,36 @@ session_start();
 
   <!-- form check in -->
   <div class="form-group">
-    <form>
+
+    <form method="POST" action="newreservation.php">
       <div class="form-row">
         <div class="form-group col-md-2">
           <label for="checkin">Check-In</label>
-          <input type="date" class="form-control" id="checkin">
+          <input name="checkindate" type="date" class="form-control" id="checkin">
         </div>
         <div class="form-group col-md-2">
           <label for="checkout">Check-Out</label>
-          <input type="date" class="form-control" id="checkout">
-        </div>
-        <div class="form-group col-md-2">
-          <label for="adults-number">Adults</label>
-          <input class="form-control" type="number" value="0" id="adults-number">
-        </div>
-        <div class="form-group col-md-2">
-          <label for="child-number">Childs</label>
-          <input class="form-control" type="number" value="0" id="childs-number">
+          <input name="checkoutdate" type="date" class="form-control" id="checkout">
         </div>
 
+
         <div class="form-group col-md-2">
-          <label for="housekeeping">Room type</label>
+          <label for="room-type">Room type</label>
           <div>
-            <select class="form-control" id="housekeeping">
-              <option value="1">Deluxe</option>
-              <option value="2">Standart</option>
-              <option value="3">Nightly</option>
-            </select>
+
+              <select name="home_type" class="form-control" id="room-type">
+                <option value="deluxe">Deluxe</option>
+                <option value="standart">Standart</option>
+                <option value="family">Family</option>
+                <option value="family-lux">Family-lux</option>
+              </select>
+
+
           </div>
         </div>
 
         <div class="form-group col-md-2">
-
-          <button type="submit" class="btn btn-primary" style="margin-top:30px;"><a style="color:white;" href="signin.html">Book Now</a></button>
+          <button name="home_res_info" type="submit" class="btn btn-primary" style="margin-top:30px;">Book Now</button>
         </div>
       </div>
     </form>
@@ -89,7 +86,7 @@ session_start();
             <i class="fas fa-star rating"></i>
             <i class="fas fa-star-half rating"></i>
           </div>
-          <a class="btn btn-danger" href="signin.html" role="button">Book now
+          <a class="btn btn-danger" href="newreservation.php" role="button">Book now
           </a>
         </div>
 
@@ -104,7 +101,7 @@ session_start();
             <i class="fas fa-star rating"></i>
             <i class="fas fa-star-half rating"></i>
           </div>
-          <a class="btn btn-danger" href="signin.html" role="button">Book now
+          <a class="btn btn-danger" href="newreservation.php" role="button">Book now
           </a>
         </div>
 
@@ -119,7 +116,22 @@ session_start();
             <i class="fas fa-star rating"></i>
             <i class="fas fa-star-half rating"></i>
           </div>
-          <a class="btn btn-danger" href="signin.html" role="button">Book now
+          <a class="btn btn-danger" href="newreservation.php" role="button">Book now
+          </a>
+        </div>
+
+        <div class="row-item featured-rooms">
+          <img src="img/room3.jpg" alt="" class="room-img">
+          <h5 class="room-name">Nightly</h5>
+          <span class="room-price">200$/Night</span>
+          <div class="room-rating">
+            <i class="fas fa-star rating"></i>
+            <i class="fas fa-star rating"></i>
+            <i class="fas fa-star rating"></i>
+            <i class="fas fa-star rating"></i>
+            <i class="fas fa-star-half rating"></i>
+          </div>
+          <a class="btn btn-danger" href="newreservation.php" role="button">Book now
           </a>
         </div>
       </div>

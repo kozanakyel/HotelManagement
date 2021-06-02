@@ -255,7 +255,7 @@ if ($countclient == 0) {
                 <div class="card-body">
                   <h6 class="card-title font-weight-bold">Support</h6>
                   <p class="card-text">Get fast, free help from our friendly assistants.</p>
-                  <button type="button" class="btn btn-primary"><a href="contactPage.html" style="color:white;">Contact Us</a></button>
+                  <button type="button" class="btn btn-primary"><a href="contactPage.php" style="color:white;">Contact Us</a></button>
                 </div>
               </div>
             </div>

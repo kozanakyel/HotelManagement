@@ -3,6 +3,21 @@
 <?php
   include '../setting/connection.php';
 
+  $todays_room_conf=$conn->prepare("UPDATE room set roomstatus=0");
+  $todays_room_conf->execute();
+  $todays_room_conf=$conn->prepare("CREATE VIEW todays_full_room AS
+      SELECT e.*, r.roomstatus FROM exist_res e, room r
+      WHERE DATE(NOW()) >= e.checkindate and DATE(NOW()) <= e.checkoutdate and e.roomno=r.roomno");
+  $todays_room_conf->execute();
+  $todays_room_conf=$conn->prepare("UPDATE todays_full_room set roomstatus=1");
+  $todays_room_conf->execute();
+  try{
+    $conn->exec("DROP VIEW todays_full_room");    
+  }catch(PDOException $e){
+    echo "Could not delete table : " . $e->getMessage();
+  }
+
+
   $roomask=$conn->prepare("SELECT r.*, rp.price FROM room r
     LEFT JOIN roomprice rp
     ON r.roomtype = rp.roomtype");

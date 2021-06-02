@@ -130,3 +130,29 @@ session_start();
     }
   }
 ?>
+
+<?php
+ if (isset($_POST['selectroomno'])) {
+
+
+   //echo $_POST['rooms'], $client_fetch['clientid'],$_SESSION['c_in_date'],$_SESSION['c_out_date'];
+
+   $reser_ask=$conn->prepare("INSERT INTO reservation SET
+          clientid=?,
+          checkindate=?,
+          checkoutdate=?,
+          roomno=?");
+   $reser_ask->execute(array(
+     $_SESSION['client_id'], $_SESSION['c_in_date'], $_SESSION['c_out_date'], $_POST['rooms']
+   ));
+   $result=$reser_ask->rowCount();
+   $update_t_price=$conn->prepare("UPDATE exist_res SET totalprice=daycount*price");
+   $update_t_price->execute();
+   if ($result==1) {
+     header("Location:../userPage.php?status=addednewreservation");
+     exit;
+   }else {
+     header("Location:../newreservation.php?status=failedreservation");
+   }
+ }
+?>
