@@ -28,8 +28,7 @@ require '../header/manheader.php';?>
             </thead>
             <tbody>
               <?php
-              $red = "red";
-              $green = "green";
+
               foreach($contactget as $contact){
                 echo "<tr>
                   <th scope='row'>" . $contact["cemail"] . "</th>
@@ -46,6 +45,99 @@ require '../header/manheader.php';?>
             </tbody>
           </table>
         </div>
+
+        <!--COMMENTS -->
+        <?php
+          $com_ask=$conn->prepare("SELECT * FROM comment_info WHERE c_status=? ORDER BY c_date");
+          $com_ask->execute(array(
+            '0'
+          ));
+          $com_fetch=$com_ask->fetchAll();
+        ?>
+        <div class="container">
+          <hr>
+          <h4 class="display-6 mr-10" style="font-weight:bold; color:black;">Reservation Comments for Corresponding</h1>
+          <hr>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">ReservationId</th>
+                <th scope="col">Comments&Request</th>
+                <th scope="col">DateTime</th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php
+
+              foreach($com_fetch as $comm){
+                echo "<form action='' method='POST'><tr>
+                  <th scope='row'><input hidden type='text' name='rsrid' value='". $comm["reservationid"] ."'>" . $comm["reservationid"] . "</th>
+                  <td>" . $comm["c_content"] . "</td>
+                  <td>" . $comm["c_date"] . "</td>
+                  <td><input type='submit' class='btn btn-success' name='listoff' value='Correspond'></td></tr></form></form>";
+              }
+              ?>
+              <?php
+              if (isset($_POST["listoff"])) {
+                $_SESSION["central_res"] = $_POST["rsrid"];
+                header("Location:../central.php");
+                exit;
+
+              }
+              ?>
+
+            </tbody>
+          </table>
+
+        </div>
+
+        <?php
+        //historic Corresponding
+          $com_ask_h=$conn->prepare("SELECT * FROM comment_info WHERE staffid IS NOT NULL
+                ORDER BY c_date DESC");
+          $com_ask_h->execute();
+          $com_fetch_h=$com_ask_h->fetchAll();
+        ?>
+        <div class="container">
+          <hr>
+          <h4 class="display-6 mr-10" style="font-weight:bold; color:black;">Corresponded Comments History</h1>
+          <hr>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">ReservationId</th>
+                <th scope="col">Staff Id</th>
+                <th scope="col">Correspond</th>
+                <th scope="col">DateTime</th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php
+
+              foreach($com_fetch_h as $comm){
+                echo "<form action='' method='POST'><tr>
+                  <th scope='row'><input hidden type='text' name='rsrid' value='". $comm["reservationid"] ."'>" . $comm["reservationid"] . "</th>
+                  <td>" . $comm["staffid"] . "</td>
+                  <td>" . $comm["c_content"] . "</td>
+                  <td>" . $comm["c_date"] . "</td>
+                  <td><input type='submit' class='btn btn-warning' name='listoff' value='See Messages'></td></tr></form></form>";
+              }
+              ?>
+              <?php
+              if (isset($_POST["listoff"])) {
+                $_SESSION["central_res"] = $_POST["rsrid"];
+                header("Location:../central.php");
+                exit;
+
+              }
+              ?>
+
+            </tbody>
+          </table>
+
+        </div>
+
+
       </div>
     </div>
 

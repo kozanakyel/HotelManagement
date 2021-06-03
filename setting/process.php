@@ -161,12 +161,30 @@ session_start();
 
 
 <?php
+//update reservation
+if (isset($_POST['u_selectroomno'])) {
 
-  if (isset($_POST["listoff"])) {
-    echo $_POST["rsrid"];
-  }
 
-  if (isset($_POST["listoff_c"])) {
-    echo $_POST["rsrid_c"];
+  echo $_SESSION['u_in_date'], $_SESSION['u_out_date'], $_POST['rooms'], $_SESSION["central_res"];
+
+  $reser_ask=$conn->prepare("UPDATE reservation SET
+         checkindate=?,
+         checkoutdate=?,
+         roomno=?
+         WHERE reservationid=?");
+  $reser_ask->execute(array(
+    $_SESSION['u_in_date'], $_SESSION['u_out_date'], $_POST['rooms'], $_SESSION["central_res"]
+  ));
+  $result=$reser_ask->rowCount();
+  $update_t_price=$conn->prepare("UPDATE exist_res SET totalprice=daycount*price");
+  $update_t_price->execute();
+  if ($result==1) {
+    header("Location:../userPage.php?status=updatereservation");
+    exit;
+  }else {
+    header("Location:../central.php?status=failed_u_reservation");
   }
+}
+
+
 ?>

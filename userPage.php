@@ -18,7 +18,8 @@ if ($countclient == 0) {
 $reser_ask = $conn->prepare("SELECT *,
     DATEDIFF(checkoutdate, checkindate) as daycount
     FROM reservation
-    WHERE clientid=?");
+    WHERE clientid=?
+    ORDER BY checkindate");
 $reser_ask->execute(array(
   $client_fetch["clientid"]
 ));
@@ -39,7 +40,7 @@ $r_fetch=$reser_ask->fetchAll();
             <div class="col-sm-6">
 
             <!--New Reservation modal for user hidden modalbox-->
-              <a role="button" class="btn btn-success" href="central.php">
+              <a role="button" class="btn btn-success" href="newreservation.php">
                 Add New Reservation
               </a>
 
@@ -63,14 +64,14 @@ $r_fetch=$reser_ask->fetchAll();
 
           <?php
           foreach ($r_fetch as $rsr) {
-          echo "<form action='setting/process.php' method='POST'>
-          <tr><th scope='row'><input hidden type='text' name='rsrid_c' value='". $rsr["reservationid"] ."'>". $rsr["reservationid"] ."</th>
+          echo "<form action='' method='POST'>
+          <tr><th scope='row'><input hidden type='text' name='rsrid' value='". $rsr["reservationid"] ."'>". $rsr["reservationid"] ."</th>
           <td>". $rsr["roomno"] ."</td>
           <td>". $rsr["checkindate"] ."</td>
           <td>". $rsr["checkoutdate"] ."</td>
           <td>". $rsr["daycount"] ."</td>
           <td>". $rsr["totalprice"] ."</td>
-          <td><input type='submit' class='btn btn-danger' name='listoff_c' value='Go To'></td></tr></form>";
+          <td><input type='submit' class='btn btn-danger' name='listoff' value='Go To'></td></tr></form>";
           }
 
           ?>
@@ -78,7 +79,14 @@ $r_fetch=$reser_ask->fetchAll();
 
           </tbody>
           </table>
+          <?php
+          if (isset($_POST["listoff"])) {
+            $_SESSION["central_res"] = $_POST["rsrid"];
+            header("Location:central.php");
+            exit;
 
+          }
+          ?>
         </div>
       </div>
     </div>

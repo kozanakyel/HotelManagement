@@ -4,7 +4,8 @@
       DATEDIFF(r.checkoutdate,r.checkindate) as daycount
       FROM reservation r
       LEFT JOIN client c
-      ON c.clientid = r.clientid WHERE r.checkindate > DATE(NOW())");
+      ON c.clientid = r.clientid
+      ORDER BY r.checkindate");
 
   $reser_ask->execute();
   $r_fetch=$reser_ask->fetchAll();
@@ -16,7 +17,7 @@
         <div class="col ml-5">
 
           <hr>
-          <h4 class="display-6 mr-10" style="font-weight:bold; color:black;">Reservation for future</h1>
+          <h4 class="display-6 mr-10" style="font-weight:bold; color:black;">Reservations</h1>
           <hr>
           <table class="table">
   <thead class="thead-dark">
@@ -36,7 +37,7 @@
 
       <?php
       foreach ($r_fetch as $rsr) {
-        echo "<form action='../setting/process.php' method='POST'>
+        echo "<form action='' method='POST'>
         <tr><th scope='row'><input hidden type='text' name='rsrid' value='". $rsr["reservationid"] ."'>". $rsr["reservationid"] ."</th>
         <td>". $rsr["roomno"] ."</td>
         <td>". $rsr["checkindate"] ."</td>
@@ -49,11 +50,23 @@
 
       ?>
 
+      <?php
+      if (isset($_POST["listoff"])) {
+        $_SESSION["central_res"] = $_POST["rsrid"];
+        header("Location:../central.php");
+        exit;
+
+      }
+      ?>
+
 
   </tbody>
 </table>
 
     </div>
+
+
+
     </div>
 
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
