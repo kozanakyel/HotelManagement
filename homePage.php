@@ -2,7 +2,12 @@
 ob_start();
 session_start();
 ?>
-<?php require 'header/header.php';?>
+<?php
+require 'header/header.php';
+$cat_ask = $conn->prepare("SELECT * FROM roomprice");
+$cat_ask->execute();
+$cat_all=$cat_ask->fetchAll();
+?>
 
   <!-- slider for hotel -->
   <div id="sliderrooms" class="carousel slide" data-ride="carousel">
@@ -13,7 +18,7 @@ session_start();
     </ol>
     <div class="carousel-inner">
       <div class="carousel-item active">
-        <img src="img/room1.jpeg" class="d-block w-100" alt="...">
+        <img src="img/room3.jpg" class="d-block w-100" alt="...">
       </div>
       <div class="carousel-item">
         <img src="img/room2.jpg" class="d-block w-100" alt="...">
@@ -79,7 +84,9 @@ session_start();
         <div class="row-item featured-rooms">
           <img src="img/room1.jpeg" alt="" class="room-img">
           <h5 class="room-name">Deluxe</h5>
-          <span class="room-price">200$/Night</span>
+          <span class="room-price"><?php echo $cat_all[0]["price"]; ?>$/Night</span>
+          <br>
+          <span class="room-price">Room Capacity: <strong><?php echo $cat_all[0]["capacity"]; ?></strong> person</span>
           <div class="room-rating">
             <i class="fas fa-star rating"></i>
             <i class="fas fa-star rating"></i>
@@ -92,38 +99,44 @@ session_start();
 
         <div class="row-item featured-rooms">
           <img src="img/room2.jpg" alt="" class="room-img">
+          <h5 class="room-name">Family</h5>
+          <span class="room-price"><?php echo $cat_all[1]["price"]; ?>$/Night</span>
+          <br>
+          <span class="room-price">Room Capacity: <strong><?php echo $cat_all[1]["capacity"]; ?></strong> person</span>
+          <div class="room-rating">
+            <i class="fas fa-star rating"></i>
+            <i class="fas fa-star rating"></i>
+            <i class="fas fa-star rating"></i>
+            <i class="fas fa-star rating"></i>
+            <i class="fas fa-star-half rating"></i>
+          </div>
+          <a class="btn btn-danger" href="newreservation.php" role="button">Book now
+          </a>
+        </div>
+
+        <div class="row-item featured-rooms">
+          <img src="img/room3.jpg" alt="" class="room-img">
+          <h5 class="room-name">Family-Lux</h5>
+          <span class="room-price"><?php echo $cat_all[2]["price"]; ?>$/Night</span>
+          <br>
+          <span class="room-price">Room Capacity: <strong><?php echo $cat_all[2]["capacity"]; ?></strong> person</span>
+          <div class="room-rating">
+            <i class="fas fa-star rating"></i>
+            <i class="fas fa-star rating"></i>
+            <i class="fas fa-star rating"></i>
+            <i class="fas fa-star rating"></i>
+            <i class="fas fa-star-half rating"></i>
+          </div>
+          <a class="btn btn-danger" href="newreservation.php" role="button">Book now
+          </a>
+        </div>
+
+        <div class="row-item featured-rooms">
+          <img src="img/room3.jpg" alt="" class="room-img">
           <h5 class="room-name">Standart</h5>
-          <span class="room-price">200$/Night</span>
-          <div class="room-rating">
-            <i class="fas fa-star rating"></i>
-            <i class="fas fa-star rating"></i>
-            <i class="fas fa-star rating"></i>
-            <i class="fas fa-star rating"></i>
-            <i class="fas fa-star-half rating"></i>
-          </div>
-          <a class="btn btn-danger" href="newreservation.php" role="button">Book now
-          </a>
-        </div>
-
-        <div class="row-item featured-rooms">
-          <img src="img/room3.jpg" alt="" class="room-img">
-          <h5 class="room-name">Nightly</h5>
-          <span class="room-price">200$/Night</span>
-          <div class="room-rating">
-            <i class="fas fa-star rating"></i>
-            <i class="fas fa-star rating"></i>
-            <i class="fas fa-star rating"></i>
-            <i class="fas fa-star rating"></i>
-            <i class="fas fa-star-half rating"></i>
-          </div>
-          <a class="btn btn-danger" href="newreservation.php" role="button">Book now
-          </a>
-        </div>
-
-        <div class="row-item featured-rooms">
-          <img src="img/room3.jpg" alt="" class="room-img">
-          <h5 class="room-name">Nightly</h5>
-          <span class="room-price">200$/Night</span>
+          <span class="room-price"><?php echo $cat_all[3]["price"]; ?>$/Night</span>
+          <br>
+          <span class="room-price">Room Capacity: <strong><?php echo $cat_all[3]["capacity"]; ?></strong> person</span>
           <div class="room-rating">
             <i class="fas fa-star rating"></i>
             <i class="fas fa-star rating"></i>

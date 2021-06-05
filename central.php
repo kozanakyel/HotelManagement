@@ -21,7 +21,6 @@ if ($countclient == 0 && $countstaff == 0) {
   Header("Location:login.php?status=unauthlog");
 }
 
-echo $_SESSION["central_res"];
 
 $r_ask = $conn->prepare("SELECT * FROM exist_res WHERE reservationid=?");
 $r_ask->execute(array(
@@ -39,6 +38,11 @@ $r_fetch = $r_ask->fetch(PDO::FETCH_ASSOC);
                       <hr>
                       <h5>Your Reservation Id:  <?php echo $r_fetch["reservationid"]; ?></h5>
                       <hr>
+                      <?php if($_GET['status']=="dateconflict") {?>
+                      <div class="alert alert-danger">
+                        <strong>FAIL!</strong> Check-out date must be bigger than Check-in!
+                      </div>
+                      <?php } ?>
                   </div>
                  </div>
 
@@ -117,7 +121,7 @@ $r_fetch = $r_ask->fetch(PDO::FETCH_ASSOC);
               echo "Could not delete table : " . $e->getMessage();
             }
             foreach ($roomget as $room) {
-              echo $room['roomno'];
+              //echo $room['roomno'];
             };
 
             $typeget=$conn->prepare("SELECT * FROM roomprice WHERE roomtype=?");
@@ -152,7 +156,7 @@ $r_fetch = $r_ask->fetch(PDO::FETCH_ASSOC);
                       }?>
                     </select>
 
-                    <button type="submit" class="btn btn-primary btn-block" name="u_selectroomno">Submit Reservation</button>
+                    <button type="submit" class="btn btn-primary" name="u_selectroomno">Submit Reservation</button>
                   </div>
                 </div>
             </div>
@@ -192,7 +196,7 @@ $r_fetch = $r_ask->fetch(PDO::FETCH_ASSOC);
             $r_fetch["reservationid"]
           ));
           $comm_fetch=$comm_ask->fetchAll();
-          echo count($comm_fetch);
+
         ?>
 
 
@@ -204,11 +208,15 @@ $r_fetch = $r_ask->fetch(PDO::FETCH_ASSOC);
                 foreach ($comm_fetch as $comment) {
                   if($comment["staffid"] == NULL){
                     echo "<div class='container'>
-                    <label class='border border-primary'><strong>" . $r_fetch["clientname"] . ":</strong>  " . $comment["c_content"] . "</label>
+                    <label class='border border-primary' style='padding:15px; border-radius:25px;'>
+                    <strong>" . $r_fetch["clientname"] . ": </strong>  " . $comment["c_content"] . "
+                    </label>
                     </div>";
                   }else {
-                    echo "<div class='container'>
-                    <label class='border border-danger'><strong>Personal Id:" . $comment["staffid"] . ":</strong>" . $comment["c_content"] . "</label>
+                    echo "<div class='container d-flex flex-row-reverse'>
+                    <label class='border border-danger' style='padding:15px; border-radius:25px;'>
+                    <strong style='color:red;'>Personal Id " . $comment["staffid"] . ": </strong>" . $comment["c_content"] . "
+                    </label>
                     </div>";
                   }
                 }
@@ -217,10 +225,10 @@ $r_fetch = $r_ask->fetch(PDO::FETCH_ASSOC);
              <br><hr>
              <div class="container">
                <form class="" action="" method="post">
-                 <label for="">Your Messages: </label>
+                 <label style="margin-left:50px;" for=""><b>Your Messages:</b></label>
                  <div class="form-group">
 
-                   <textarea name="s_comment" class="form-group" rows="8" cols="80"></textarea>
+                   <textarea style="padding:10px;" name="s_comment" class="form-group" rows="8" cols="80"></textarea>
                  </div>
                  <div class="form-group">
                    <input type="submit" class="form-group btn btn-primary" name="correspond">

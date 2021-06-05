@@ -46,11 +46,11 @@ session_start();
       <div class="form-row">
         <div class="form-group col-md-4">
           <label for="emailContact">Email</label>
-          <input type="email" name="cemail" required class="form-control" id="emailContact" placeholder="Email">
+          <input type="email" name="cemail" required class="form-control" placeholder="Email">
         </div>
         <div class="form-group col-md-4">
           <label for="phoneContact">Phone</label>
-          <input type="tel" name="cphone" required  class="form-control" id="phoneContact" placeholder="Phone Number">
+          <input type="tel" name="cphone" required  class="form-control" placeholder="Phone Number">
         </div>
 
       </div>

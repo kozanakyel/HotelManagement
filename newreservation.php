@@ -2,13 +2,13 @@
 ob_start();
 session_start();
 require 'header/header.php';
-echo $_SESSION['clientname'];
+$_SESSION['clientname'];
 
 $clientask = $conn->prepare("SELECT * FROM client WHERE clientemail=?");
 $clientask->execute(array(
   $_SESSION['clientemail']
 ));
-echo $countclient= $clientask->rowCount();
+$countclient= $clientask->rowCount();
 $client_fetch = $clientask->fetch(PDO::FETCH_ASSOC);
 
 if ($countclient == 0) {
@@ -16,27 +16,37 @@ if ($countclient == 0) {
 }
 
 if (isset($_POST['home_res_info'])) {
-  echo $_POST['checkindate'] . "<br>" . $_POST['checkoutdate'] . "<br>" . $_POST['home_type'];
+  //echo $_POST['checkindate'] . "<br>" . $_POST['checkoutdate'] . "<br>" . $_POST['home_type'];
 }
 
 ?>
 
 <div class="container">
   <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
-
+    <div class="form-row">
+        <div class="container">
+            <h3>HELLO <?php echo $client_fetch["clientname"] . " " . $client_fetch["clientsurname"]; ?></h3>
+            <?php if($_GET['status']=="dateconflict") {?>
+            <div class="alert alert-danger">
+              <strong>FAIL!</strong> Check-out date must be bigger than Check-in!
+            </div>
+            <?php } ?>
+            <hr>
+        </div>
+       </div>
      <div class="form-row">
          <div class="form-group col-md-2">
              <label for="guest-name">Name</label>
-             <input name="c_name" class="form-control" type="text" value="<?php echo $client_fetch['clientname']?>" id="c_name">
+             <input name="c_name" class="form-control" readonly type="text" value="<?php echo $client_fetch['clientname']?>" id="c_name">
          </div>
 
          <div class="form-group col-md-2">
              <label for="checkin">Surname</label>
-             <input name="c_surname" type="text" value="<?php echo $client_fetch['clientsurname']?>" class="form-control" id="surname">
+             <input name="c_surname" type="text" readonly value="<?php echo $client_fetch['clientsurname']?>" class="form-control" id="surname">
          </div>
          <div class="form-group col-md-2">
              <label for="checkout">Email</label>
-             <input name="c_surname" type="email" value="<?php echo $client_fetch['clientemail']?>" class="form-control" id="email">
+             <input name="c_surname" type="email" readonly value="<?php echo $client_fetch['clientemail']?>" class="form-control" id="email">
          </div>
      </div>
 
@@ -105,7 +115,7 @@ if (isset($_POST['home_res_info'])) {
      echo "Could not delete table : " . $e->getMessage();
    }
    foreach ($roomget as $room) {
-     echo $room['roomno'];
+     //echo $room['roomno'];
    };
 
    $typeget=$conn->prepare("SELECT * FROM roomprice WHERE roomtype=?");
@@ -119,6 +129,7 @@ if (isset($_POST['home_res_info'])) {
 
 
  <form class="" action="setting/process.php" method="POST">
+
    <div class="<?php echo $d_none?>">
        <div class="form-group col-md-2">
          <div class="row-item featured-rooms">
@@ -140,7 +151,7 @@ if (isset($_POST['home_res_info'])) {
              }?>
            </select>
 
-           <button type="submit" class="btn btn-primary btn-block" name="selectroomno">Submit Reservation</button>
+           <button type="submit" class="btn btn-primary" name="selectroomno">Submit Reservation</button>
          </div>
        </div>
    </div>

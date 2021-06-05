@@ -34,7 +34,13 @@
       <section class="container-fluid text-dark">
         <section class="row justify-content-center mr-5">
           <section class="col-12 col-sm-6 col-md-3">
-            <h1 class="display-8" style="margin-top:80px;">Login Management</h6>
+            <h1 class="display-8" style="margin-top:80px;"><b>Login Management</b></h6>
+
+              <?php if($_GET['status']=="no") {?>
+              <div class="alert alert-danger">
+                <strong>FAIL!</strong> Passwords or StaffID dont match!
+              </div>
+              <?php } ?>
 
 
             <form class="form-container" action="../setting/process.php" method="POST">
@@ -44,12 +50,9 @@
               </div>
               <div class="form-group">
                 <label for="">Password</label>
-                <input type="password" required class="form-control" name="spassword" id="">
+                <input type="password" required class="form-control" name="spassword">
               </div>
-              <div class="form-group form-check">
-                <input type="checkbox" class="form-check-input" id="">
-                <label class="form-check-label" for="exampleCheck1">Check me out</label>
-              </div>
+
               <!--<button type="submit" class="btn btn-primary btn-block">Submit</button>-->
               <button name="log_staff" type="submit" class="btn btn-primary btn-block active">Submit</button>
             </form>

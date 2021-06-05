@@ -138,24 +138,31 @@ session_start();
 
 
    //echo $_POST['rooms'], $client_fetch['clientid'],$_SESSION['c_in_date'],$_SESSION['c_out_date'];
-
-   $reser_ask=$conn->prepare("INSERT INTO reservation SET
-          clientid=?,
-          checkindate=?,
-          checkoutdate=?,
-          roomno=?");
-   $reser_ask->execute(array(
-     $_SESSION['client_id'], $_SESSION['c_in_date'], $_SESSION['c_out_date'], $_POST['rooms']
-   ));
-   $result=$reser_ask->rowCount();
-   $update_t_price=$conn->prepare("UPDATE exist_res SET totalprice=daycount*price");
-   $update_t_price->execute();
-   if ($result==1) {
-     header("Location:../userPage.php?status=addednewreservation");
-     exit;
+   if ($_SESSION['c_in_date'] < $_SESSION['c_out_date']) {
+     $reser_ask=$conn->prepare("INSERT INTO reservation SET
+            clientid=?,
+            checkindate=?,
+            checkoutdate=?,
+            roomno=?");
+     $reser_ask->execute(array(
+       $_SESSION['client_id'], $_SESSION['c_in_date'], $_SESSION['c_out_date'], $_POST['rooms']
+     ));
+     $result=$reser_ask->rowCount();
+     $update_t_price=$conn->prepare("UPDATE exist_res SET totalprice=daycount*price");
+     $update_t_price->execute();
+     if ($result==1) {
+       header("Location:../userPage.php?status=addednewreservation");
+       exit;
+     }else {
+       header("Location:../newreservation.php?status=failedreservation");
+       exit;
+     }
    }else {
-     header("Location:../newreservation.php?status=failedreservation");
+     header("Location:../newreservation.php?status=dateconflict");
+     exit;
    }
+
+
  }
 ?>
 
@@ -165,25 +172,30 @@ session_start();
 if (isset($_POST['u_selectroomno'])) {
 
 
-  echo $_SESSION['u_in_date'], $_SESSION['u_out_date'], $_POST['rooms'], $_SESSION["central_res"];
+  //echo $_SESSION['u_in_date'], $_SESSION['u_out_date'], $_POST['rooms'], $_SESSION["central_res"];
 
-  $reser_ask=$conn->prepare("UPDATE reservation SET
-         checkindate=?,
-         checkoutdate=?,
-         roomno=?
-         WHERE reservationid=?");
-  $reser_ask->execute(array(
-    $_SESSION['u_in_date'], $_SESSION['u_out_date'], $_POST['rooms'], $_SESSION["central_res"]
-  ));
-  $result=$reser_ask->rowCount();
-  $update_t_price=$conn->prepare("UPDATE exist_res SET totalprice=daycount*price");
-  $update_t_price->execute();
-  if ($result==1) {
-    header("Location:../userPage.php?status=updatereservation");
-    exit;
+  if ($_SESSION['u_out_date'] > $_SESSION['u_in_date']) {
+    $reser_ask=$conn->prepare("UPDATE reservation SET
+           checkindate=?,
+           checkoutdate=?,
+           roomno=?
+           WHERE reservationid=?");
+    $reser_ask->execute(array(
+      $_SESSION['u_in_date'], $_SESSION['u_out_date'], $_POST['rooms'], $_SESSION["central_res"]
+    ));
+    $result=$reser_ask->rowCount();
+    $update_t_price=$conn->prepare("UPDATE exist_res SET totalprice=daycount*price");
+    $update_t_price->execute();
+    if ($result==1) {
+      header("Location:../userPage.php?status=updatereservation");
+      exit;
+    }else {
+      header("Location:../central.php?status=failed_u_reservation");
+    }
   }else {
-    header("Location:../central.php?status=failed_u_reservation");
+    header("Location:../central.php?status=dateconflict");
   }
+
 }
 
 

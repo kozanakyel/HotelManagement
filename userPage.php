@@ -2,13 +2,12 @@
 ob_start();
 session_start();
 require 'header/header.php';
-echo $_SESSION['clientname'];
 
 $clientask = $conn->prepare("SELECT * FROM client WHERE clientemail=?");
 $clientask->execute(array(
   $_SESSION['clientemail']
 ));
-echo $countclient= $clientask->rowCount();
+$countclient= $clientask->rowCount();
 $client_fetch = $clientask->fetch(PDO::FETCH_ASSOC);
 
 if ($countclient == 0) {
@@ -35,12 +34,12 @@ $r_fetch=$reser_ask->fetchAll();
         <div class="table-title">
           <div class="row">
             <div class="col-sm-6">
-              <h2>Manage <b>Reservations</b></h2>
+              <h2><b>Manage Reservations</b></h2>
             </div>
             <div class="col-sm-6">
 
             <!--New Reservation modal for user hidden modalbox-->
-              <a role="button" class="btn btn-success" href="newreservation.php">
+              <a role="button" class="btn btn-success" href="newreservation.php" style="margin-left:350px;">
                 Add New Reservation
               </a>
 
@@ -94,7 +93,7 @@ $r_fetch=$reser_ask->fetchAll();
     <!--  user change profile -->
     <div class="container">
       <hr>
-      <h4 class="display-6" style="font-weight:bold;">User Settings</h1>
+      <h4 class="display-6" style="font-weight:bold; margin-top:100px;">User Settings</h1>
         <hr>
 
         <div class="col">
@@ -147,6 +146,12 @@ $r_fetch=$reser_ask->fetchAll();
                                     <input name="client_email" class="form-control" type="email" value="<?php echo $client_fetch['clientemail'] ?>">
                                   </div>
                                 </div>
+                                <div class="col">
+                                  <div class="form-group">
+                                    <label>Phone</label>
+                                    <input name="client_phone" class="form-control" type="number" value="<?php echo $client_fetch['clientphone'] ?>">
+                                  </div>
+                                </div>
                               </div>
 
                             </div>
@@ -158,7 +163,7 @@ $r_fetch=$reser_ask->fetchAll();
                                 <div class="col">
                                   <div class="form-group">
                                     <label>Current Password</label>
-                                    <input class="form-control" type="password" placeholder="••••••">
+                                    <input name="client_password" class="form-control" value="<?php echo $client_fetch['clientpassword'] ?>" type="password" placeholder="••••••">
                                   </div>
                                 </div>
                               </div>
@@ -166,7 +171,7 @@ $r_fetch=$reser_ask->fetchAll();
                                 <div class="col">
                                   <div class="form-group">
                                     <label>New Password</label>
-                                    <input class="form-control" type="password" placeholder="••••••">
+                                    <input name="new_password" class="form-control" value="<?php echo $client_fetch['clientpassword'] ?>" type="password" placeholder="••••••">
                                   </div>
                                 </div>
                               </div>
@@ -174,7 +179,7 @@ $r_fetch=$reser_ask->fetchAll();
                                 <div class="col">
                                   <div class="form-group">
                                     <label>Confirm <span class="d-none d-xl-inline">Password</span></label>
-                                    <input class="form-control" type="password" placeholder="••••••"></div>
+                                    <input name="re_password" class="form-control" value="<?php echo $client_fetch['clientpassword'] ?>" type="password" placeholder="••••••"></div>
                                 </div>
                               </div>
                             </div>
