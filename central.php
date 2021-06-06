@@ -97,7 +97,7 @@ $r_fetch = $r_ask->fetch(PDO::FETCH_ASSOC);
           $d_none="form-row d-none";
 
           if (isset($_POST['u_res'])) {
-            $d_none="form-row";
+            
             $_SESSION['u_in_date'] = $_POST['u_checkin'];
             $_SESSION['u_out_date'] = $_POST['u_checkout'];
             $_SESSION['client_id'] = $r_fetch['clientid'];
@@ -120,9 +120,9 @@ $r_fetch = $r_ask->fetch(PDO::FETCH_ASSOC);
             }catch(PDOException $e){
               echo "Could not delete table : " . $e->getMessage();
             }
-            foreach ($roomget as $room) {
-              //echo $room['roomno'];
-            };
+            if (count($roomget)>0 ) {
+              $d_none="form-row";
+            }
 
             $typeget=$conn->prepare("SELECT * FROM roomprice WHERE roomtype=?");
             $typeget->execute(array(

@@ -88,10 +88,12 @@ if (isset($_POST['home_res_info'])) {
  </form>
 
  <?php
+
  $d_none="form-row d-none";
 
  if (isset($_POST['show_room'])) {
-   $d_none="form-row";
+
+
    $_SESSION['c_in_date'] = $_POST['d_checkindate'];
    $_SESSION['c_out_date'] = $_POST['d_checkoutdate'];
    $_SESSION['client_id'] = $client_fetch['clientid'];
@@ -114,9 +116,9 @@ if (isset($_POST['home_res_info'])) {
    }catch(PDOException $e){
      echo "Could not delete table : " . $e->getMessage();
    }
-   foreach ($roomget as $room) {
-     //echo $room['roomno'];
-   };
+   if (count($roomget)>0 ) {
+     $d_none="form-row";
+   }
 
    $typeget=$conn->prepare("SELECT * FROM roomprice WHERE roomtype=?");
    $typeget->execute(array(
@@ -129,7 +131,7 @@ if (isset($_POST['home_res_info'])) {
 
 
  <form class="" action="setting/process.php" method="POST">
-   <?php if(isset($_POST['show_room']) and count($roomget) == 0) {?>
+   <?php if(isset($_POST['show_room']) and count($roomget) == 0) {  ?>
    <div class="alert alert-danger">
      <strong>FAIL!</strong> Not any available room. Please choose another Room type!
    </div>
