@@ -199,6 +199,9 @@ $_SESSION["c_id"] = $client_fetch["clientid"];
                             <div class="col d-flex justify-content-end">
                               <button name="save_client_update" class="btn btn-primary" type="submit">Save Changes</button>
                             </div>
+                            <div class="col d-flex justify-content-end">
+                              <button name="delete_account" class="btn btn-danger" type="submit">Delete Account</button>
+                            </div>
                           </div>
                         </form>
 
