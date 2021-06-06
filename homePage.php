@@ -38,41 +38,44 @@ $cat_all=$cat_ask->fetchAll();
   </div>
 
   <!-- form check in -->
-  <div class="form-group" style="margin-left:200px;">
+  <div class="container">
+    <div class="form-group">
 
-    <form method="POST" action="newreservation.php">
-      <div class="form-row">
-        <div class="form-group col-md-2">
-          <label for="checkin">Check-In</label>
-          <input name="checkindate" type="date" class="form-control" id="checkin">
-        </div>
-        <div class="form-group col-md-2">
-          <label for="checkout">Check-Out</label>
-          <input name="checkoutdate" type="date" class="form-control" id="checkout">
-        </div>
-
-
-        <div class="form-group col-md-2">
-          <label for="room-type">Room type</label>
-          <div>
-
-              <select name="home_type" class="form-control" id="room-type">
-                <option value="deluxe">Deluxe</option>
-                <option value="standart">Standart</option>
-                <option value="family">Family</option>
-                <option value="family-lux">Family-lux</option>
-              </select>
+      <form method="POST" action="newreservation.php">
+        <div class="form-row">
+          <div class="form-group col-md-2">
+            <label for="checkin">Check-In</label>
+            <input name="checkindate" type="date" class="form-control" id="checkin">
+          </div>
+          <div class="form-group col-md-2">
+            <label for="checkout">Check-Out</label>
+            <input name="checkoutdate" type="date" class="form-control" id="checkout">
+          </div>
 
 
+          <div class="form-group col-md-2">
+            <label for="room-type">Room type</label>
+            <div>
+
+                <select name="home_type" class="form-control" id="room-type">
+                  <option value="deluxe">Deluxe</option>
+                  <option value="standart">Standart</option>
+                  <option value="family">Family</option>
+                  <option value="family-lux">Family-lux</option>
+                </select>
+
+
+            </div>
+          </div>
+
+          <div class="form-group col-md-2">
+            <button name="home_res_info" type="submit" class="btn btn-primary" style="margin-top:30px;">Book Now</button>
           </div>
         </div>
-
-        <div class="form-group col-md-2">
-          <button name="home_res_info" type="submit" class="btn btn-primary" style="margin-top:30px;">Book Now</button>
-        </div>
-      </div>
-    </form>
+      </form>
+    </div>
   </div>
+
 <!-- room cards -->
   <section class="rooms">
     <div class="container">
