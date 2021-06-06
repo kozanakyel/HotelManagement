@@ -23,7 +23,7 @@ $reser_ask->execute(array(
   $client_fetch["clientid"]
 ));
 $r_fetch=$reser_ask->fetchAll();
-
+$_SESSION["c_id"] = $client_fetch["clientid"];
 ?>
 
   <!--  Manage Reservations -->
@@ -34,6 +34,16 @@ $r_fetch=$reser_ask->fetchAll();
         <div class="table-title">
           <div class="row">
             <div class="col-sm-6">
+              <?php if($_GET['status']=="pass_nomatch") {?>
+              <div class="alert alert-danger">
+                <strong>FAIL!</strong> new Passwords confirmation wrong!
+              </div>
+              <?php } ?>
+              <?php if($_GET['status']=="pass_must6") {?>
+              <div class="alert alert-danger">
+                <strong>FAIL!</strong> new Passwords must be at least 6 letter!
+              </div>
+              <?php } ?>
               <h2><b>Manage Reservations</b></h2>
             </div>
             <div class="col-sm-6">
@@ -122,7 +132,7 @@ $r_fetch=$reser_ask->fetchAll();
                     </ul>
                     <div class="tab-content pt-3">
                       <div class="tab-pane active">
-                        <form class="form" novalidate="">
+                        <form class="form" action="setting/process.php" method="POST">
                           <div class="row">
                             <div class="col">
                               <div class="row">

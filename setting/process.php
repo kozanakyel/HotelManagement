@@ -199,4 +199,58 @@ if (isset($_POST['u_selectroomno'])) {
 }
 
 
+//Update User Information
+if (isset($_POST["save_client_update"])) {
+
+  if ($_POST["client_password"] == $_POST["new_password"] and
+      $_POST["re_password"] == $_POST["new_password"]) {
+    $u_client=$conn->prepare("UPDATE client SET
+      clientname=?,
+      clientsurname=?,
+      clientemail=?,
+      clientphone=?
+      WHERE clientid=?");
+    $u_client->execute(array(
+      $_POST["client_name"], $_POST["client_surname"], $_POST["client_email"], $_POST["client_phone"], $_SESSION["c_id"]
+    ));
+    $u_count=$u_client->rowCount();
+    if ($u_count > 0) {
+      $_SESSION['clientemail'] = $_POST["client_email"];
+      $_SESSION['clientsurname'] = $_POST["client_surname"];
+      $_SESSION['clientname'] = $_POST["client_name"];
+      header("Location:../userPage.php?status=suc_update");
+      exit;
+    }
+  }elseif($_POST["client_password"] != $_POST["new_password"]
+      and $_POST["re_password"] == $_POST["new_password"]
+      and strlen($_POST["re_password"]) > 5){
+        $u_client=$conn->prepare("UPDATE client SET
+          clientname=?,
+          clientsurname=?,
+          clientemail=?,
+          clientphone=?,
+          clientpassword=?
+          WHERE clientid=?");
+        $u_client->execute(array(
+          $_POST["client_name"], $_POST["client_surname"], $_POST["client_email"], $_POST["client_phone"], md5($_POST["re_password"]) ,$_SESSION["c_id"]
+        ));
+        $u_count=$u_client->rowCount();
+        if ($u_count > 0) {
+          $_SESSION['clientemail'] = $_POST["client_email"];
+          $_SESSION['clientsurname'] = $_POST["client_surname"];
+          $_SESSION['clientname'] = $_POST["client_name"];
+          header("Location:../userPage.php?status=suc_update");
+          exit;
+        }
+  }elseif($_POST["re_password"] != $_POST["new_password"]){
+    header("Location:../userPage.php?status=pass_nomatch");
+    exit;
+  }elseif(strlen($_POST["re_password"]) < 6){
+    header("Location:../userPage.php?status=pass_must6");
+    exit;
+  }
+
+}
+
+
 ?>
