@@ -135,6 +135,11 @@ $r_fetch = $r_ask->fetch(PDO::FETCH_ASSOC);
 
 
           <form class="" action="setting/process.php" method="POST">
+            <?php if(isset($_POST['u_res']) and count($roomget) == 0) {?>
+            <div class="alert alert-danger">
+              <strong>FAIL!</strong> Not any available room. Please choose another Room type!
+            </div>
+            <?php } ?>
             <div class="<?php echo $d_none?>">
                 <div class="form-group col-md-2">
                   <div class="row-item featured-rooms">

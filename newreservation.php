@@ -129,7 +129,11 @@ if (isset($_POST['home_res_info'])) {
 
 
  <form class="" action="setting/process.php" method="POST">
-
+   <?php if(isset($_POST['show_room']) and count($roomget) == 0) {?>
+   <div class="alert alert-danger">
+     <strong>FAIL!</strong> Not any available room. Please choose another Room type!
+   </div>
+   <?php } ?>
    <div class="<?php echo $d_none?>">
        <div class="form-group col-md-2">
          <div class="row-item featured-rooms">
@@ -156,6 +160,7 @@ if (isset($_POST['home_res_info'])) {
        </div>
    </div>
  </form>
+
 </div>
 
 
