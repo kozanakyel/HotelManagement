@@ -254,7 +254,6 @@ if (isset($_POST["save_client_update"])) {
 
 //Delete Account
 if (isset($_POST["delete_account"])) {
-  $_POST["client_email"]
   $delete_acc=$conn->prepare("DELETE FROM client WHERE clientemail=?");
   $delete_acc->execute(array(
     $_POST["client_email"]
