@@ -96,7 +96,7 @@ if (isset($_POST['home_res_info'])) {
    $_SESSION['c_out_date'] = $_POST['d_checkoutdate'];
    $_SESSION['client_id'] = $client_fetch['clientid'];
 
-   $checkroom=$conn->prepare("CREATE VIEW not_available_rooms AS
+   $checkroom=$conn->prepare("CREATE VIEW not_available_rooms{$_SESSION['client_id']} AS
       SELECT * FROM reservation
       WHERE (? <= checkindate and checkoutdate >= ?)
       OR (? <= checkindate and checkoutdate <= ? and checkindate <= ?)
@@ -105,12 +105,12 @@ if (isset($_POST['home_res_info'])) {
       $_POST['d_checkindate'], $_POST['d_checkoutdate'], $_POST['d_checkindate'], $_POST['d_checkoutdate'], $_POST['d_checkoutdate'], $_POST['d_checkindate'], $_POST['d_checkoutdate'], $_POST['d_checkindate']
    ));
    $checkroom=$conn->prepare("SELECT r.roomno FROM room r
-     WHERE NOT EXISTS (SELECT * FROM not_available_rooms na WHERE na.roomno = r.roomno) AND r.roomtype=?");
+     WHERE NOT EXISTS (SELECT * FROM not_available_rooms{$_SESSION['client_id']} na WHERE na.roomno = r.roomno) AND r.roomtype=?");
    $checkroom->execute(array($_POST['d_room_type']));
    $roomgetava=$checkroom->fetchAll();
    $roomget=$roomgetava;
    try{
-     $conn->exec("DROP VIEW not_available_rooms");
+     $conn->exec("DROP VIEW not_available_rooms{$_SESSION['client_id']}");
    }catch(PDOException $e){
      echo "Could not delete table : " . $e->getMessage();
    }
