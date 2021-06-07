@@ -3,6 +3,7 @@ ob_start();
 session_start();
 ?>
 <?php
+
 require 'header/header.php';
 $cat_ask = $conn->prepare("SELECT * FROM roomprice");
 $cat_ask->execute();
