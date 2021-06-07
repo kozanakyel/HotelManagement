@@ -70,7 +70,7 @@
         }?>
       </select>
 
-      <button type="submit" class="btn btn-primary" name="selectstaff">Choose Room</button>
+      <button type="submit" class="btn btn-primary" name="selectstaff">Choose Staff</button>
   </form>
 
   <?php
