@@ -13,11 +13,17 @@
         </div>
 
         <div class="d-flex">
-          <div class="p-2"><canvas id="myChart" style="height:300px; width:300px"></canvas></div>
-          <div class="p-2 ml-10">
-            <div id="piechart"></div>
-            <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+          <div class="container row">
+            <div class="p-2 ml-10">
+              <div id="piechart">Montly salary for Rezervation</div>
+              <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+            </div>
           </div>
+          <div class="container row">
+            <div class="p-2"><canvas id="myChart" style="height:300px; width:300px"></canvas></div>
+          </div>
+
+
         </div>
 
       </div>
@@ -48,8 +54,8 @@
       // Optional; add a title and set the width and height of the chart
       var options = {
         'title': 'Montly Room situation',
-        'width': 400,
-        'height': 400
+        'width': 1000,
+        'height': 1000
       };
 
       // Display the chart inside the <div> element with id="piechart"
