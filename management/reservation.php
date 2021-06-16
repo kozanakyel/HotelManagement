@@ -1,18 +1,62 @@
 <?php require '../header/manheader.php';
-
+if (!isset($_POST["get_dates"])) {
   $reser_ask = $conn->prepare("SELECT *
       FROM exist_res
       ORDER BY checkindate");
 
   $reser_ask->execute();
   $r_fetch=$reser_ask->fetchAll();
+}
+
 
 ?>
 
       <!-- for the table rooms menu-->
       <div class="row text-dark">
         <div class="col ml-5">
+          <hr>
+          <!-- Resrvation page-->
+          <div class="container">
+            <form action="<?php echo $_SERVER["PHP_SELF"];?>" method="POST">
+              <div class="form-row">
+                <div class="form-group col-md-3">
+                  <label for="nameContact">Check In Date</label>
+                  <input type="date" name="s_c_in" required class="form-control"  >
+                </div>
+                <div class="form-group col-md-3">
+                  <label for="nameContact">Check Out Date</label>
+                  <input type="date" name="s_c_out" required class="form-control"  >
+                </div>
 
+              </div>
+              <div class="form-group col-md-3">
+                <button type="submit" name="get_dates" class="btn btn-primary">Search</button>
+              </div>
+            </form>
+
+          <?php
+            if(isset($_POST['get_dates'])){
+              echo $_POST['s_c_out'];
+              $reser_search = $conn->prepare("SELECT *
+                  FROM exist_res
+                  WHERE (? <= checkindate and checkoutdate <= ?)
+                  OR (? <= checkindate and checkoutdate <= ? and checkindate <= ?)
+                  OR (? >= checkindate and checkoutdate <= ? and checkoutdate >= ?)
+                  OR (? >= checkindate and checkoutdate >= ?)
+                  ORDER BY checkindate");
+              $reser_search->execute(array(
+                $_POST['s_c_in'], $_POST['s_c_out'], $_POST['s_c_in'],
+                $_POST['s_c_out'], $_POST['s_c_out'], $_POST['s_c_in'],
+                $_POST['s_c_out'], $_POST['s_c_in'], $_POST['s_c_in'],
+                $_POST['s_c_out']
+              ));
+              $r_fetch=$reser_search->fetchAll();
+            }
+
+          ?>
+
+          </div>
+          <!-- reservationpage ended-->
           <hr>
           <h4 class="display-6 mr-10" style="font-weight:bold; color:black;">Future Reservations</h1>
           <hr>

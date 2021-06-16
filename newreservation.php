@@ -100,12 +100,12 @@ if (isset($_POST['home_res_info'])) {
 
    $checkroom=$conn->prepare("CREATE VIEW not_available_rooms{$_SESSION['client_id']} AS
       SELECT * FROM reservation
-      WHERE (? <= checkindate and checkoutdate >= ?)
+      WHERE resstatus = ? and ((? <= checkindate and checkoutdate <= ?)
       OR (? <= checkindate and checkoutdate <= ? and checkindate <= ?)
       OR (? >= checkindate and checkoutdate <= ? and checkoutdate >= ?)
-      OR (? >= checkindate and checkoutdate >= ?)");
+      OR (? >= checkindate and checkoutdate >= ?))");
    $checkroom->execute(array(
-      $_POST['d_checkindate'], $_POST['d_checkoutdate'], $_POST['d_checkindate'],
+      '1', $_POST['d_checkindate'], $_POST['d_checkoutdate'], $_POST['d_checkindate'],
       $_POST['d_checkoutdate'], $_POST['d_checkoutdate'], $_POST['d_checkindate'],
       $_POST['d_checkoutdate'], $_POST['d_checkindate'], $_POST['d_checkindate'],
       $_POST['d_checkoutdate']

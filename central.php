@@ -111,12 +111,12 @@ $r_fetch = $r_ask->fetch(PDO::FETCH_ASSOC);
 
             $checkroom=$conn->prepare("CREATE VIEW not_available_rooms{$_SESSION['client_id']} AS
                SELECT * FROM reservation
-               WHERE (? <= checkindate and checkoutdate >= ?)
-               OR (? <= checkindate and checkoutdate <= ? and checkindate <= ?)
+               WHERE resstatus=? and ((? <= checkindate and checkoutdate <= ?)
+               OR (? <= checkindate and checkoutdate >= ? and checkindate <= ?)
                OR (? >= checkindate and checkoutdate <= ? and checkoutdate >= ?)
-               OR (? >= checkindate and checkoutdate >= ?)");
+               OR (? >= checkindate and checkoutdate >= ?))");
             $checkroom->execute(array(
-               $_POST['u_checkin'], $_POST['u_checkout'], $_POST['u_checkin'],
+               '1', $_POST['u_checkin'], $_POST['u_checkout'], $_POST['u_checkin'],
                $_POST['u_checkout'], $_POST['u_checkout'], $_POST['u_checkin'],
                $_POST['u_checkout'], $_POST['u_checkin'], $_POST['u_checkin'],
                $_POST['u_checkout']

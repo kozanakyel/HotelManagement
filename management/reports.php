@@ -6,25 +6,54 @@
           <hr>
           <h4 class="display-6 mr-10" style="font-weight:bold; color:black;">Reports</h1>
             <hr>
-        </div>
-        <div class="container">
-          <h6 class="display-6 mr-5" style="color:black;">Monthly</h1>
+            <!-- Resrvation page-->
+            <div class="container">
+              <form action="<?php echo $_SERVER["PHP_SELF"];?>" method="POST">
+                <div class="form-row">
+                  <div class="form-group col-md-3">
+                    <label for="nameContact">Check In Date</label>
+                    <input type="date" name="r_c_in" required class="form-control"  >
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="nameContact">Check Out Date</label>
+                    <input type="date" name="r_c_out" required class="form-control"  >
+                  </div>
+
+                </div>
+                <div class="form-group col-md-3">
+                  <button type="submit" name="get_r_dates" class="btn btn-primary">Get Report</button>
+                </div>
+              </form>
+
+            <?php
+              if(isset($_POST['get_r_dates'])){
+                echo $_POST["r_c_in"];
+
+              }
+
+            ?>
+
+            </div>
+            <!-- reservationpage ended-->
             <hr>
         </div>
-
-        <div class="d-flex">
-          <div class="container row">
-            <div class="p-2 ml-10">
-              <div id="piechart">Montly salary for Rezervation</div>
-              <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <div class="container">
+          <h6 class="display-6 mr-5" style="color:black;"><strong>Monthly</strong></h1>
+            <hr>
+            <div class="d-flex">
+              <div class="container row">
+                <div class="p-2 ml-10">
+                  <div id="piechart">Montly salary for Rezervation</div>
+                  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+                </div>
+              </div>
+              <div class="container row">
+                <div class="p-2"></div>
+              </div>
             </div>
-          </div>
-          <div class="container row">
-            <div class="p-2"><canvas id="myChart" style="height:300px; width:300px"></canvas></div>
-          </div>
-
-
         </div>
+
+
 
       </div>
 
@@ -111,36 +140,6 @@
         y: 15
       }
     ];
-
-    new Chart("myChart", {
-      type: "scatter",
-      data: {
-        datasets: [{
-          pointRadius: 4,
-          pointBackgroundColor: "rgb(0,0,255)",
-          data: xyValues
-        }]
-      },
-      options: {
-        legend: {
-          display: false
-        },
-        scales: {
-          xAxes: [{
-            ticks: {
-              min: 40,
-              max: 160
-            }
-          }],
-          yAxes: [{
-            ticks: {
-              min: 6,
-              max: 16
-            }
-          }],
-        }
-      }
-    });
   </script>
 
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
