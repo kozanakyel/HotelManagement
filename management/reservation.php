@@ -36,7 +36,6 @@ if (!isset($_POST["get_dates"])) {
 
           <?php
             if(isset($_POST['get_dates'])){
-              echo $_POST['s_c_out'];
               $reser_search = $conn->prepare("SELECT *
                   FROM exist_res
                   WHERE (? <= checkindate and checkoutdate <= ?)
