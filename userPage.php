@@ -14,9 +14,8 @@ if ($countclient == 0) {
   Header("Location:login.php?status=unauthlog");
 }
 
-$reser_ask = $conn->prepare("SELECT *,
-    DATEDIFF(checkoutdate, checkindate) as daycount
-    FROM reservation
+$reser_ask = $conn->prepare("SELECT *
+    FROM exist_res
     WHERE clientid=?
     ORDER BY checkindate");
 $reser_ask->execute(array(
@@ -62,6 +61,7 @@ $_SESSION["c_id"] = $client_fetch["clientid"];
 
           <th scope="col">Reservation ID</th>
           <th scope="col">Room No</th>
+          <th scope="col">Room Type</th>
           <th scope="col">Check In</th>
           <th scope="col">Check Out</th>
           <th scope="col">Day Number</th>
@@ -87,6 +87,7 @@ $_SESSION["c_id"] = $client_fetch["clientid"];
           echo "<form action='' method='POST'>
           <tr><th scope='row'><input hidden type='text' name='rsrid' value='". $rsr["reservationid"] ."'>". $rsr["reservationid"] ."</th>
           <td>". $rsr["roomno"] ."</td>
+          <td>". $rsr["roomtype"] ."</td>
           <td>". $rsr["checkindate"] ."</td>
           <td>". $rsr["checkoutdate"] ."</td>
           <td>". $rsr["daycount"] ."</td>
