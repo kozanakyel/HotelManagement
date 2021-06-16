@@ -66,13 +66,24 @@ $_SESSION["c_id"] = $client_fetch["clientid"];
           <th scope="col">Check Out</th>
           <th scope="col">Day Number</th>
           <th scope="col">Total Price</th>
-
+          <th scope="col">Status</th>
           </tr>
           </thead>
           <tbody>
 
           <?php
           foreach ($r_fetch as $rsr) {
+            if ($rsr["resstatus"] == 1 and $rsr["checkindate"] <= date("Y-m-d")) {
+              $color_status = "yellow";
+              $status_info = "Historic";
+            }else if($rsr["resstatus"] == 1 and $rsr["checkindate"] > date("Y-m-d")){
+              $color_status = "green";
+              $status_info = "Future";
+            }else {
+              $color_status = "lightcoral";
+              $status_info = "Canceled";
+            }
+
           echo "<form action='' method='POST'>
           <tr><th scope='row'><input hidden type='text' name='rsrid' value='". $rsr["reservationid"] ."'>". $rsr["reservationid"] ."</th>
           <td>". $rsr["roomno"] ."</td>
@@ -80,6 +91,7 @@ $_SESSION["c_id"] = $client_fetch["clientid"];
           <td>". $rsr["checkoutdate"] ."</td>
           <td>". $rsr["daycount"] ."</td>
           <td>". $rsr["totalprice"] ."</td>
+          <td style='background:" . $color_status .";'><strong>". $status_info ."</strong></td>
           <td><input type='submit' class='btn btn-danger' name='listoff' value='Go To'></td></tr></form>";
           }
 
@@ -139,13 +151,13 @@ $_SESSION["c_id"] = $client_fetch["clientid"];
                                 <div class="col">
                                   <div class="form-group">
                                     <label>Name</label>
-                                    <input class="form-control" type="text" name="client_name" placeholder="John Smith" value="<?php echo $client_fetch['clientname'] ?>">
+                                    <input class="form-control" type="text" name="client_name" value="<?php echo $client_fetch['clientname'] ?>">
                                   </div>
                                 </div>
                                 <div class="col">
                                   <div class="form-group">
                                     <label>Surname</label>
-                                    <input class="form-control" type="text" name="client_surname" placeholder="johnny.s" value="<?php echo $client_fetch['clientsurname'] ?>">
+                                    <input class="form-control" type="text" name="client_surname" value="<?php echo $client_fetch['clientsurname'] ?>">
                                   </div>
                                 </div>
                               </div>

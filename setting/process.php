@@ -111,9 +111,9 @@ session_start();
     $clientpassword = md5($_POST['clientpassword']);
 
     $clientask = $conn->prepare("SELECT * FROM client
-      WHERE clientemail=? AND clientpassword=?");
+      WHERE clientemail=? AND clientpassword=? AND clientstatus=?");
     $clientask->execute(array(
-      $clientemail, $clientpassword
+      $clientemail, $clientpassword, '0'
     ));
   echo  $c_fetch = $clientask->fetch(PDO::FETCH_ASSOC);
   echo $c_fetch['clientname'];
@@ -254,9 +254,9 @@ if (isset($_POST["save_client_update"])) {
 
 //Delete Account
 if (isset($_POST["delete_account"])) {
-  $delete_acc=$conn->prepare("DELETE FROM client WHERE clientemail=?");
+  $delete_acc=$conn->prepare("UPDATE client SET clientstatus=? WHERE clientemail=?");
   $delete_acc->execute(array(
-    $_POST["client_email"]
+    '1',$_POST["client_email"]
   ));
   $result=$delete_acc->rowCount();
   if ($result>0) {

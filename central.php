@@ -79,10 +79,17 @@ $r_fetch = $r_ask->fetch(PDO::FETCH_ASSOC);
                                  </select>
                               </div>
                           </div>
+                          <?php
+                          if ($r_fetch["resstatus"] == 0) {
+                            $d_cacnel_none = "d-none";
+                          }else {
+                            $d_cacnel_none = "";
+                          }
+                          ?>
 
-                          <div class="form-group col-md-2">
+                          <div class="form-group col-md-2 <?php echo $d_cacnel_none ?>">
                               <div style="position:relative; left: 500px;" class="form-group col-md-2 ">
-                                  <button name="u_res" type="submit" class="btn btn-success">Update</button>
+                                <button name="u_res" type="submit" class="btn btn-success">Update</button>
 
                               </div>
                               <div style="position:relative; left: 500px;" class="form-group col-md-2 ">
@@ -97,7 +104,7 @@ $r_fetch = $r_ask->fetch(PDO::FETCH_ASSOC);
           $d_none="form-row d-none";
 
           if (isset($_POST['u_res'])) {
-            
+
             $_SESSION['u_in_date'] = $_POST['u_checkin'];
             $_SESSION['u_out_date'] = $_POST['u_checkout'];
             $_SESSION['client_id'] = $r_fetch['clientid'];
@@ -106,9 +113,13 @@ $r_fetch = $r_ask->fetch(PDO::FETCH_ASSOC);
                SELECT * FROM reservation
                WHERE (? <= checkindate and checkoutdate >= ?)
                OR (? <= checkindate and checkoutdate <= ? and checkindate <= ?)
-               OR (? >= checkindate and checkoutdate <= ? and checkoutdate >= ?)");
+               OR (? >= checkindate and checkoutdate <= ? and checkoutdate >= ?)
+               OR (? >= checkindate and checkoutdate >= ?)");
             $checkroom->execute(array(
-               $_POST['u_checkin'], $_POST['u_checkout'], $_POST['u_checkin'], $_POST['u_checkout'], $_POST['u_checkout'], $_POST['u_checkin'], $_POST['u_checkout'], $_POST['u_checkin']
+               $_POST['u_checkin'], $_POST['u_checkout'], $_POST['u_checkin'],
+               $_POST['u_checkout'], $_POST['u_checkout'], $_POST['u_checkin'],
+               $_POST['u_checkout'], $_POST['u_checkin'], $_POST['u_checkin'],
+               $_POST['u_checkout']
             ));
             $checkroom=$conn->prepare("SELECT r.roomno FROM room r
               WHERE NOT EXISTS (SELECT * FROM not_available_rooms{$_SESSION['client_id']} na WHERE na.roomno = r.roomno) AND r.roomtype=?");
@@ -172,15 +183,16 @@ $r_fetch = $r_ask->fetch(PDO::FETCH_ASSOC);
         <?php
         //CANCEL Reservation
         if (isset($_POST["can_res"])) {
-
+          /*
           $cancel_comm = $conn->prepare("DELETE FROM comment_info
             WHERE reservationid=?");
           $cancel_comm->execute(array(
             $r_fetch["reservationid"]
           ));
-          $cancel_res = $conn->prepare("DELETE FROM reservation WHERE reservationid=?");
+          */
+          $cancel_res = $conn->prepare("UPDATE reservation SET resstatus=? WHERE reservationid=?");
           $cancel_res->execute(array(
-            $r_fetch["reservationid"]
+            '0',$r_fetch["reservationid"]
           ));
           $c_result = $cancel_res->rowCount();
           if ($c_result != 0) {

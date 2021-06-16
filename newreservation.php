@@ -102,9 +102,13 @@ if (isset($_POST['home_res_info'])) {
       SELECT * FROM reservation
       WHERE (? <= checkindate and checkoutdate >= ?)
       OR (? <= checkindate and checkoutdate <= ? and checkindate <= ?)
-      OR (? >= checkindate and checkoutdate <= ? and checkoutdate >= ?)");
+      OR (? >= checkindate and checkoutdate <= ? and checkoutdate >= ?)
+      OR (? >= checkindate and checkoutdate >= ?)");
    $checkroom->execute(array(
-      $_POST['d_checkindate'], $_POST['d_checkoutdate'], $_POST['d_checkindate'], $_POST['d_checkoutdate'], $_POST['d_checkoutdate'], $_POST['d_checkindate'], $_POST['d_checkoutdate'], $_POST['d_checkindate']
+      $_POST['d_checkindate'], $_POST['d_checkoutdate'], $_POST['d_checkindate'],
+      $_POST['d_checkoutdate'], $_POST['d_checkoutdate'], $_POST['d_checkindate'],
+      $_POST['d_checkoutdate'], $_POST['d_checkindate'], $_POST['d_checkindate'],
+      $_POST['d_checkoutdate']
    ));
    $checkroom=$conn->prepare("SELECT r.roomno FROM room r
      WHERE NOT EXISTS (SELECT * FROM not_available_rooms{$_SESSION['client_id']} na WHERE na.roomno = r.roomno) AND r.roomtype=?");

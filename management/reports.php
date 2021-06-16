@@ -54,8 +54,8 @@
       // Optional; add a title and set the width and height of the chart
       var options = {
         'title': 'Montly Room situation',
-        'width': 1000,
-        'height': 1000
+        'width': 500,
+        'height': 500
       };
 
       // Display the chart inside the <div> element with id="piechart"

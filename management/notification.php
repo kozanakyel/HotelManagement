@@ -83,7 +83,7 @@ require '../header/manheader.php';?>
 
         <!--COMMENTS -->
         <?php
-          $com_ask=$conn->prepare("SELECT * FROM comment_info WHERE c_status=? ORDER BY c_date");
+          $com_ask=$conn->prepare("SELECT * FROM comment_info WHERE c_status=? ORDER BY c_date DESC");
           $com_ask->execute(array(
             '0'
           ));
