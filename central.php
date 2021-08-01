@@ -172,7 +172,7 @@ $r_fetch = $r_ask->fetch(PDO::FETCH_ASSOC);
                       }?>
                     </select>
 
-                    <button type="submit" class="btn btn-primary" name="u_selectroomno">Submit Reservation</button>
+                    <button type="submit" class="btn btn-primary" name="u_selectroomno">Submit Reservations</button>
                   </div>
                 </div>
             </div>
